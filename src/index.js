@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, compose } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-// import 'materialize-css/dist/css/materialize.min.css';
 import './style.css';
 
 const rootReducer = combineReducers({

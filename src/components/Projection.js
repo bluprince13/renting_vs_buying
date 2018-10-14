@@ -33,8 +33,8 @@ class Projection extends React.Component {
 			homeValueAppreciation,
 			amortization,
 			stampDutyPercentage,
-      homePurchaseCosts,
-      homeSellingFeesPercentage,
+			homePurchaseCosts,
+			homeSellingFeesPercentage,
 			rent,
 			rentChange,
 			investmentReturn,
@@ -89,10 +89,12 @@ class Projection extends React.Component {
 		const homeValue = time.map(year => {
 			return homePrice * (1 + (year * homeValueAppreciation) / 100);
 		});
-    console.log('homeValue', homeValue);
-    
-    const homeSellingFees = homeValue.map(value => value * homeSellingFeesPercentage/100)
-    console.log('homeSellingFees', homeSellingFees);
+		console.log('homeValue', homeValue);
+
+		const homeSellingFees = homeValue.map(
+			value => (value * homeSellingFeesPercentage) / 100
+		);
+		console.log('homeSellingFees', homeSellingFees);
 
 		const netWorthBuy = time.map(year => {
 			return homeValue[year] - debtYearly[year] - homeSellingFees[year];
@@ -132,14 +134,14 @@ class Projection extends React.Component {
 			},
 			[initialInvestment]
 		);
-    console.log('netWorthRent ', netWorthRent);
-    
-    const netWorthRentPV = netWorthRent.map((futureValue, year) => {
+		console.log('netWorthRent ', netWorthRent);
+
+		const netWorthRentPV = netWorthRent.map((futureValue, year) => {
 			return presentValue(futureValue, inflation, year);
 		});
 		console.log('netWorthRentPV', netWorthRentPV);
 
-    const differencePV = time.map(year => {
+		const differencePV = time.map(year => {
 			return netWorthRentPV[year] - netWorthBuyPV[year];
 		});
 		console.log('netWorthRentPV', netWorthRentPV);
@@ -147,15 +149,15 @@ class Projection extends React.Component {
 		return (
 			<Plot
 				data={[
-          {
+					{
 						x: time,
 						y: netWorthRentPV,
 						type: 'scatter',
 						mode: 'lines+points',
 						marker: { color: 'blue' },
 						name: 'Rent'
-          },
-          {
+					},
+					{
 						x: time,
 						y: netWorthBuyPV,
 						type: 'scatter',
@@ -175,16 +177,16 @@ class Projection extends React.Component {
 				layout={{
 					title: 'Net worth projection',
 					xaxis: {
-            title: 'Time (years)',
-            hoverformat: '.0f',
-            showgrid: true,
-            zeroline: true,
+						title: 'Time (years)',
+						hoverformat: '.0f',
+						showgrid: true,
+						zeroline: true
 					},
 					yaxis: {
-            title: 'Net worth (Present Value)',
-            hoverformat: '.0f',
-            showgrid: true,
-            zeroline: true,
+						title: 'Net worth (Present Value)',
+						hoverformat: '.0f',
+						showgrid: true,
+						zeroline: true
 					}
 				}}
 			/>

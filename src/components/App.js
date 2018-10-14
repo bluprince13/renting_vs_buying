@@ -35,7 +35,7 @@ const Sidebar = styled.div`
 `
 
 const Main = styled.div`
-  flex: 2;
+  flex: 3;
 `
 
 const Footer = styled.div`

@@ -1,6 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 function range(start, end) {
 	return Array(end - start + 1)
@@ -19,6 +20,12 @@ function compoundInterest(principal, rate, time) {
 function presentValue(futureValue, inflationRate, time) {
 	return futureValue / (1 + inflationRate / 100) ** time;
 }
+
+const StyledPlot= styled(Plot)`
+	margin: auto;
+	width: 100%;
+	height: 100%;
+`;
 
 class Projection extends React.Component {
 	render() {
@@ -147,49 +154,51 @@ class Projection extends React.Component {
 		console.log('netWorthRentPV', netWorthRentPV);
 
 		return (
-			<Plot
-				data={[
-					{
-						x: time,
-						y: netWorthRentPV,
-						type: 'scatter',
-						mode: 'lines+points',
-						marker: { color: 'blue' },
-						name: 'Rent'
-					},
-					{
-						x: time,
-						y: netWorthBuyPV,
-						type: 'scatter',
-						mode: 'lines+points',
-						marker: { color: 'red' },
-						name: 'Buy'
-					},
-					{
-						x: time,
-						y: differencePV,
-						type: 'scatter',
-						mode: 'lines+points',
-						marker: { color: 'green' },
-						name: 'Rent - Buy'
-					}
-				]}
-				layout={{
-					title: 'Net worth projection',
-					xaxis: {
-						title: 'Time (years)',
-						hoverformat: '.0f',
-						showgrid: true,
-						zeroline: true
-					},
-					yaxis: {
-						title: 'Net worth (Present Value)',
-						hoverformat: '.0f',
-						showgrid: true,
-						zeroline: true
-					}
-				}}
-			/>
+				<StyledPlot
+					data={[
+						{
+							x: time,
+							y: netWorthRentPV,
+							type: 'scatter',
+							mode: 'lines+points',
+							marker: { color: 'blue' },
+							name: 'Rent'
+						},
+						{
+							x: time,
+							y: netWorthBuyPV,
+							type: 'scatter',
+							mode: 'lines+points',
+							marker: { color: 'red' },
+							name: 'Buy'
+						},
+						{
+							x: time,
+							y: differencePV,
+							type: 'scatter',
+							mode: 'lines+points',
+							marker: { color: 'green' },
+							name: 'Rent - Buy'
+						}
+					]}
+					layout={{
+						title: 'Net worth projection',
+						xaxis: {
+							title: 'Time (years)',
+							hoverformat: '.0f',
+							showgrid: true,
+							zeroline: true,
+							showline: true,
+						},
+						yaxis: {
+							title: 'Net worth present value',
+							hoverformat: '.0f',
+							showgrid: true,
+							zeroline: true,
+							showline: true,
+						}
+					}}
+				/>
 		);
 	}
 }

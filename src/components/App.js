@@ -47,7 +47,7 @@ class App extends Component {
 		return (
 			<Layout>
         <Header>
-			    Renting vs. buying a house 
+			    Renting vs. buying
         </Header>
         <Content>
           <Sidebar>

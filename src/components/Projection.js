@@ -29,10 +29,6 @@ const StyledPlot= styled(Plot)`
 
 class Projection extends React.Component {
 	render() {
-		if (typeof this.props.InputForm === 'undefined') {
-			return null;
-		}
-
 		const {
 			homePrice,
 			mortgageAnnualInterest,
@@ -46,7 +42,7 @@ class Projection extends React.Component {
 			rentChange,
 			investmentReturn,
 			inflation
-		} = this.props.InputForm.values;
+		} = this.props.input;
 
 		const numYears = amortization;
 		const time = range(0, numYears - 1);
@@ -203,10 +199,8 @@ class Projection extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		InputForm: state.form.InputForm
-	};
-};
+function mapStateToProps({ input }) {
+	return { input };
+}
 
 export default connect(mapStateToProps)(Projection);

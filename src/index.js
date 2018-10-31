@@ -4,24 +4,30 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, compose } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { createStore, compose } from 'redux';
+import reducers from "./reducers";
+
+import {
+	BrowserRouter as Router,
+} from 'react-router-dom'
+
+import { RouterToUrlQuery } from 'react-url-query';
 
 import './style.css';
 
-const rootReducer = combineReducers({
-	form: formReducer
-});
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-	rootReducer,
+	reducers,
 	composeEnhancers()
 );
 
 render(
 	<Provider store={store}>
-		<App />
+		<Router>
+			<RouterToUrlQuery>
+				<App />
+			</RouterToUrlQuery>
+		</Router>
 	</Provider>,
 	document.getElementById('root')
 );

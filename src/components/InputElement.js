@@ -1,6 +1,9 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { changeInput } from "../actions";
 
 const StyledInput = styled.div`
 	display: flex;
@@ -56,7 +59,10 @@ const Info = styled.div`
 `;
 
 const InputElement = props => {
-	const { label, name, min, max, type, info, unit } = props.props;
+	const { label, name, min, max, step, type, info, unit } = props.props;
+	const { changeInput, input } = props;
+	const value = input[name]
+
 	return (
 		<StyledInput>
 			<StyledSlider>
@@ -68,30 +74,42 @@ const InputElement = props => {
 							<ToolTipText>{info}</ToolTipText>
 						</Info>
 					) : (
-						''
-					)}
+							''
+						)}
 				</div>
-				<Field
+				<input
 					name={name}
-					component="input"
 					min={min}
 					max={max}
+					step={step}
 					type={type}
-					parse={value => Number(value)}
+					onChange={(event) => changeInput({[name]: event.target.value })}
+					value={value}
 				/>
 			</StyledSlider>
 			<StyledText>
-				<Field
+				<input
 					name={name}
-					component="input"
-					type={'text'}
+					type={'number'}
 					size={8}
-					parse={value => Number(value)}
+					min={min}
+					max={max}
+					step={step}
+					onChange={(event) => changeInput({[name]: event.target.value })}
+					value={value}
 				/>
-				<label style={{marginLeft: '0.5rem'}}>{unit}</label>
+				<label style={{ marginLeft: '0.5rem' }}>{unit}</label>
 			</StyledText>
 		</StyledInput>
 	);
 };
 
-export default InputElement;
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ changeInput: changeInput }, dispatch);
+}
+
+function mapStateToProps({ input }) {
+	return { input };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputElement);

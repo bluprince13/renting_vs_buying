@@ -5,7 +5,7 @@ export default [
 		min: 50000,
 		max: 1000000,
 		step: 1000,
-		value: 200000,
+		defaultValue: 200000,
 		type: 'range',
 		info: 'The home price excluding any costs incurred in purchasing it.'
 	},
@@ -15,7 +15,7 @@ export default [
 		min: 0,
 		max: 25,
 		step: 0.1,
-		value: 5,
+		defaultValue: 5,
 		type: 'range',
 		info: 'The annual interest rate for the mortgage over your term, as quoted by your lender.',
 		unit: '%'
@@ -26,7 +26,7 @@ export default [
 		min: 0,
 		max: 100,
 		step: 0.1,
-		value: 10,
+		defaultValue: 10,
 		type: 'range',
 		info: 'The amount of money, as a percentage of home price, you will put towards the purchase of your home upfront that will not be covered by your mortgage.',
 		unit: '%'
@@ -37,7 +37,7 @@ export default [
 		min: 0,
 		max: 40,
 		step: 1,
-		value: 20,
+		defaultValue: 20,
 		type: 'range',
 		info: 'The total length of time you will take to pay off your mortgage.',
 		unit: 'years'
@@ -48,7 +48,7 @@ export default [
 		min: 0,
 		max: 20,
 		step: 0.1,
-		value: 0,
+		defaultValue: 0,
 		type: 'range',
 		info: '',
 		unit: '%'
@@ -59,7 +59,7 @@ export default [
 		min: 0,
 		max: 10000,
 		step: 100,
-		value: 3000,
+		defaultValue: 3000,
 		type: 'range',
 		info: '',
 		unit: ''
@@ -70,7 +70,7 @@ export default [
 		min: -5,
 		max: 15,
 		step: 0.1,
-		value: 2,
+		defaultValue: 2,
 		type: 'range',
 		info: '',
 		unit: '%'
@@ -81,7 +81,7 @@ export default [
 		min: 0,
 		max: 10,
 		step: 0.1,
-		value: 5,
+		defaultValue: 5,
 		type: 'range',
 		info: '',
 		unit: '%'
@@ -92,7 +92,7 @@ export default [
 		min: 50,
 		max: 1500,
 		step: 10,
-		value: 400,
+		defaultValue: 400,
 		type: 'range',
 		info: '',
 		unit: ''
@@ -103,7 +103,7 @@ export default [
 		min: 0,
 		max: 15,
 		step: 0.1,
-		value: 2,
+		defaultValue: 2,
 		type: 'range',
 		info: '',
 		unit: '%'
@@ -114,7 +114,7 @@ export default [
 		min: 0,
 		max: 20,
 		step: 0.1,
-		value: 5,
+		defaultValue: 5,
 		type: 'range',
 		info: '',
 		unit: '%'
@@ -125,7 +125,7 @@ export default [
 		min: -5,
 		max: 10,
 		step: 0.1,
-		value: 3,
+		defaultValue: 3,
 		type: 'range',
 		info: '',
 		unit: '%'

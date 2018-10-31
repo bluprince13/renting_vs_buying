@@ -13,6 +13,7 @@
     "react-scripts": "2.0.4",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
+    "redux-query-sync": "0.1.7",
     "styled-components": "^3.4.10"
   },
   "scripts": {

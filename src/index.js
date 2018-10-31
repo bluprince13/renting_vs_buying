@@ -11,22 +11,20 @@ import {
 	BrowserRouter as Router,
 } from 'react-router-dom'
 
-import { RouterToUrlQuery } from 'react-url-query';
+import storeEnhancer from './functions/storeEnhancer'
 
 import './style.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
 	reducers,
-	composeEnhancers()
+	composeEnhancers(storeEnhancer),
 );
 
 render(
 	<Provider store={store}>
 		<Router>
-			<RouterToUrlQuery>
 				<App />
-			</RouterToUrlQuery>
 		</Router>
 	</Provider>,
 	document.getElementById('root')

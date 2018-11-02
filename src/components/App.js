@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 import InputForm from './InputForm';
 import Projection from './Projection';
 
@@ -47,7 +48,7 @@ class App extends Component {
 		return (
 			<Layout>
         <Header>
-			    Renting vs. buying
+			    <Link to='/' style={{ textDecoration: 'none' }}>Renting vs. buying a house</Link>
         </Header>
         <Content>
           <Sidebar>

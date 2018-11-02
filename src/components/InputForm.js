@@ -7,6 +7,12 @@ const renderFields = fields.map(props => {
 	return <InputElement key={props.name} props={props} />
 });
 
+/**
+ *
+ *
+ * @class InputForm
+ * @extends {Component}
+ */
 class InputForm extends Component {
 	render() {
 		return <form>{renderFields}</form>;

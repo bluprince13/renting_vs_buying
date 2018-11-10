@@ -56,11 +56,11 @@ class App extends Component {
           </Sidebar>
           <Main>
             <Projection />
+            <Footer>
+              Footer
+            </Footer>
           </Main>
         </Content>
-        <Footer>
-          Footer
-        </Footer>
 			</Layout>
 		);
 	}

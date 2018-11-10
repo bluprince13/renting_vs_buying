@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "history": "4.7.2",
+    "mathjs": "5.2.3",
     "plotly.js": "^1.41.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

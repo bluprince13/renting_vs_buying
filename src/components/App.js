@@ -48,7 +48,7 @@ class App extends Component {
 		return (
 			<Layout>
         <Header>
-			    <Link to='/' style={{ textDecoration: 'none' }}>Renting vs. buying a house</Link>
+			    <Link onClick={this.forceUpdate} to='/' style={{ textDecoration: 'none' }}>Renting vs. buying a house</Link>
         </Header>
         <Content>
           <Sidebar>

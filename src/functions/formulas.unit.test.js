@@ -8,7 +8,7 @@ import {
   getPresentValue,
   getFutureValue,
   getValueEachYear,
-  getPresentValueEachYear,
+  getPresentValueEachPeriod,
   getDiscountFactor,
   getLoanPaymentMonthly,
   getDebtEachYear,
@@ -54,8 +54,8 @@ test('gets value each year', () => {
 });
 
 test('gets present value each year', () => {
-  expect(getPresentValueEachYear([1000, 1100], 10)[0]).toBeCloseTo(1000);
-  expect(getPresentValueEachYear([1000, 1100], 10)[1]).toBeCloseTo(1000);
+  expect(getPresentValueEachPeriod([1000, 1100], 10)[0]).toBeCloseTo(1000);
+  expect(getPresentValueEachPeriod([1000, 1100], 10)[1]).toBeCloseTo(1000);
 });
 
 test('gets discount factor', () => {

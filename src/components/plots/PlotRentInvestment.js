@@ -48,7 +48,7 @@ class PlotRentInvestment extends React.Component {
 					layout={{
 						title: 'Rent scenario: Investment opportunity',
 						xaxis: {
-							title: 'Time (year)',
+							title: 'Time (years)',
 							hoverformat: '.0f',
 							showgrid: true,
 							zeroline: true,
@@ -65,7 +65,7 @@ class PlotRentInvestment extends React.Component {
 					}}
 				/>
 				<Footer>
-					
+
 				</Footer>
 			</div>
 		);

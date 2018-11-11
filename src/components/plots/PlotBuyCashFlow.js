@@ -78,7 +78,7 @@ class PlotBuyCashFlow extends React.Component {
 					layout={{
 						title: 'Buy scenario: Cashflow',
 						xaxis: {
-							title: 'Time (months)',
+							title: 'Time (years)',
 							hoverformat: '.0f',
 							showgrid: true,
 							zeroline: true,

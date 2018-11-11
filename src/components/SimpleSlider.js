@@ -15,6 +15,7 @@ import {
 
 class SimpleSlider extends Component {
     render() {
+      const input = this.props.input
       const buyScenarioOutputs = getBuyScenarioOutputs(this.props.input)
       const { cashFlowNet: buyScenarioCashFlowNet } = buyScenarioOutputs
       const rentScenarioOutputs = getRentScenarioOutputs({...this.props.input, buyScenarioCashFlowNet})
@@ -35,22 +36,22 @@ class SimpleSlider extends Component {
         <div>
           <Slider {...settings}>
             <div>
-              <PlotRentVsBuy buyScenarioOutputs={buyScenarioOutputs} rentScenarioOutputs={rentScenarioOutputs} />
+              <PlotRentVsBuy input={input} buyScenarioOutputs={buyScenarioOutputs} rentScenarioOutputs={rentScenarioOutputs} />
             </div>
             <div>
-              <PlotBuyInitialCosts buyScenarioOutputs={buyScenarioOutputs} />
+              <PlotBuyInitialCosts input={input} buyScenarioOutputs={buyScenarioOutputs} />
             </div>
             <div>
-              <PlotLoanPayments buyScenarioOutputs={buyScenarioOutputs} />
+              <PlotLoanPayments input={input} buyScenarioOutputs={buyScenarioOutputs} />
             </div>
             <div>
-              <PlotBuyCashFlow buyScenarioOutputs={buyScenarioOutputs} />
+              <PlotBuyCashFlow input={input} buyScenarioOutputs={buyScenarioOutputs} />
             </div>
             <div>
-              <PlotRentInvestment buyScenarioOutputs={buyScenarioOutputs}  rentScenarioOutputs={rentScenarioOutputs} />
+              <PlotRentInvestment input={input} buyScenarioOutputs={buyScenarioOutputs}  rentScenarioOutputs={rentScenarioOutputs} />
             </div>
             <div>
-              <TableLoanPayments buyScenarioOutputs={buyScenarioOutputs} />
+              <TableLoanPayments input={input} buyScenarioOutputs={buyScenarioOutputs} />
             </div>
           </Slider>
         </div>

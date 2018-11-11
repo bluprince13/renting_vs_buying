@@ -8,7 +8,7 @@ const params = fields.reduce(
         obj[name] = {
             selector: state => state.input[name],
             action: value => ({ type: CHANGE_INPUT, payload: { [name]: value } }),
-            stringToValue: string => Number.parseInt(string) || 1,
+            stringToValue: string => Number(string) || 1,
             valueToString: value => `${value}`,
             defaultValue: defaultValue,
         };

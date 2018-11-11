@@ -11,7 +11,6 @@ import {
   getPresentValueEachYear,
   getDiscountFactor,
   getLoanPaymentMonthly,
-  getDebtEachMonth,
   getDebtEachYear,
   getValueArray,
   setInitialZero,
@@ -65,13 +64,6 @@ test('gets discount factor', () => {
 
 test('gets monthly loan payment', () => {
   expect(getLoanPaymentMonthly(100000, 6, 30)).toBeCloseTo(599.55);
-});
-
-test('gets debt each month', () => {
-  expect(getDebtEachMonth(100000, 6, 30)[0]).toBeCloseTo(100000);
-  expect(getDebtEachMonth(100000, 6, 30)[1]).toBeCloseTo(99900.45);
-  expect(getDebtEachMonth(100000, 6, 30)[2]).toBeCloseTo(99800.40);
-  expect(getDebtEachMonth(100000, 6, 30).slice(-1)[0]).toBeCloseTo(0);
 });
 
 test('gets debt each year', () => {

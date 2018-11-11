@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import InputForm from './InputForm';
-import Projection from './Projection';
+import SimpleSlider from './SimpleSlider';
 
 const Layout = styled.div`
   display: flex;
@@ -37,10 +37,15 @@ const Sidebar = styled.div`
 
 const Main = styled.div`
   flex: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 `
 
-const Footer = styled.div`
-  height: 10%;
+const Carousel = styled.div`
+  width: 90%;
+  margin: auto;
 `
 
 class App extends Component {
@@ -55,10 +60,9 @@ class App extends Component {
             <InputForm />
           </Sidebar>
           <Main>
-            <Projection />
-            <Footer>
-              Footer
-            </Footer>
+            <Carousel>
+              <SimpleSlider />
+            </Carousel>
           </Main>
         </Content>
 			</Layout>

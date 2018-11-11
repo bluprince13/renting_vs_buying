@@ -76,14 +76,17 @@ export function getLoanPaymentMonthly(loan, mortgageInterestRate, numYears) {
 export function getLoanPaymentEachMonth(loan, mortgageInterestRate, numYears) {
 	const numMonths = numYears * 12;
 	const loanPaymentMonthly = getLoanPaymentMonthly(loan, mortgageInterestRate, numYears);
-	const loanPaymentEachMonth = Array(numMonths).fill(loanPaymentMonthly);
+	var loanPaymentEachMonth = Array(numMonths).fill(loanPaymentMonthly);
 	return loanPaymentEachMonth
 }
 
 // Reference: https://www.thebalance.com/loan-payment-calculations-315564
-export function getDebtEachMonth(loan, mortgageInterestRate, numYears) {
-	const loanPaymentEachMonth = getLoanPaymentEachMonth(loan, mortgageInterestRate, numYears)
+export function calcLoanPaymentFactorsEachMonth(loan, mortgageInterestRate, numYears) {
+	let loanPaymentEachMonth = getLoanPaymentEachMonth(loan, mortgageInterestRate, numYears)
 	const interestMonthly = mortgageInterestRate / 12
+	let interestEachMonth = [0]
+	let principalEachMonth = [0]
+
 	const debtEachMonth = loanPaymentEachMonth.reduce(
 		(accumulator, loanPaymentThisMonth) => {
 			const debtLastMonth = accumulator.slice(-1)[0];
@@ -92,18 +95,24 @@ export function getDebtEachMonth(loan, mortgageInterestRate, numYears) {
 				interestMonthly,
 				1
 			);
-			const principalPaidOffThisMonth =
+			const principalThisMonth =
 				loanPaymentThisMonth - interestThisMonth;
-			const debtNextMonth = debtLastMonth - principalPaidOffThisMonth;
+
+			interestEachMonth.push(interestThisMonth);
+			principalEachMonth.push(principalThisMonth);
+				
+			const debtNextMonth = debtLastMonth - principalThisMonth;
 			return [...accumulator, debtNextMonth];
 		},
 		[loan]
 	);
-	return debtEachMonth
+
+	loanPaymentEachMonth.unshift(0)
+	return { debtEachMonth, loanPaymentEachMonth, interestEachMonth, principalEachMonth }
 }
 
 export function getDebtEachYear(loan, mortgageInterestRate, numYears) {
-	const debtEachMonth = getDebtEachMonth(loan, mortgageInterestRate, numYears)
+	const { debtEachMonth } = calcLoanPaymentFactorsEachMonth(loan, mortgageInterestRate, numYears)
 	const time = getRange(0, numYears);
 	const debtEachYear = time.map(year => {
 		const month = 12 * year;
@@ -112,10 +121,16 @@ export function getDebtEachYear(loan, mortgageInterestRate, numYears) {
 	return debtEachYear
 }
 
-export function getInitialCostsArray(downPayment, stampDuty, numYears) {
-	const initialCosts = downPayment + stampDuty
-	const initialCostsArray = Array(numYears + 1).fill(initialCosts);
-	return initialCostsArray
+export function getValueArray(value, length) {
+	const ValueArray = Array(length).fill(value);
+	return ValueArray
+}
+
+export function setInitialZero(inputArray) {
+		let outputArray = inputArray
+		outputArray.pop()
+		outputArray.unshift(0)
+	return outputArray
 }
 
 export function getBuyScenarioOutputs(props) {
@@ -125,6 +140,7 @@ export function getBuyScenarioOutputs(props) {
 		amortization,
 		downPaymentPercentage,
 		stampDutyPercentage,
+		homePurchaseCosts,
 		mortgageInterestRate,
 		rentIncomeFirstMonth,
 		rentAppreciation,
@@ -134,21 +150,29 @@ export function getBuyScenarioOutputs(props) {
 	} = props
 
 	const numYears = amortization;
+	const time = getRange(0, numYears);
+	const numMonths = numYears * 12
+	const timeMonths = getRange(0, numMonths);
 
 	// initial costs
 	const downPayment = getPercentage(homePrice, downPaymentPercentage);
 	const loan = homePrice - downPayment
 	const stampDuty = getPercentage(homePrice, stampDutyPercentage);
-	const initialCostsArray = getInitialCostsArray(downPayment, stampDuty, numYears)
+	const initialCosts = downPayment + stampDuty + homePurchaseCosts
+	const initialCostsArrayCumulative = getValueArray(initialCosts, numYears + 1)
 
 	// value of house and debt
 	const homeValueEachYear = getValueEachYear(homePrice, homeValueAppreciation, numYears);
 	const debtEachYear = getDebtEachYear(loan, mortgageInterestRate, numYears)
 
 	// in and out each year
-	const homeMaintenanceCostsEachYear = getPercentageEachYear(homeValueEachYear, homeMaintenancePercentage)
+	const homeMaintenanceCostsEachYear = setInitialZero(
+		getPercentageEachYear(homeValueEachYear, homeMaintenancePercentage)
+	)
 	const homeMaintenanceCostsEachYearCumulative = getCumulative(homeMaintenanceCostsEachYear)
-	const rentIncomeEachYear = getValueEachYear(12 * rentIncomeFirstMonth, rentAppreciation, numYears)
+	const rentIncomeEachYear = setInitialZero(
+		getValueEachYear(12 * rentIncomeFirstMonth, rentAppreciation, numYears)
+	)
 	const rentIncomeEachYearCumulative = getCumulative(rentIncomeEachYear)
 
 	// selling fees
@@ -156,22 +180,46 @@ export function getBuyScenarioOutputs(props) {
 
 	// netWorth
 	const netWorthBuyPos = math.add(homeValueEachYear, rentIncomeEachYearCumulative)
-	const netWorthBuyNeg = math.add(initialCostsArray, debtEachYear, homeSellingFeesEachYear, homeMaintenanceCostsEachYearCumulative)
+	const netWorthBuyNeg = math.add(initialCostsArrayCumulative, debtEachYear, homeSellingFeesEachYear, homeMaintenanceCostsEachYearCumulative)
 	const netWorthBuy = math.subtract(netWorthBuyPos, netWorthBuyNeg)
 	const netWorthBuyPV = getPresentValueEachYear(netWorthBuy, inflationRate);
 
 	// cashFlow
-	const loanPaymentYearly = getLoanPaymentMonthly(loan, mortgageInterestRate, numYears)
-	const loanPaymentEachYear = Array(numYears + 1).fill(loanPaymentYearly);
+	const loanPaymentYearly = getLoanPaymentMonthly(loan, mortgageInterestRate, numYears) * 12
+	let loanPaymentEachYear = Array(numYears + 1).fill(loanPaymentYearly);
+	loanPaymentEachYear = setInitialZero(loanPaymentEachYear);
 	
-	const cashFlowIn = rentIncomeEachYearCumulative
-	const cashFlowOut = math.add(initialCostsArray, homeMaintenanceCostsEachYearCumulative, loanPaymentEachYear)
+	// additional detail of interest
+	const cashFlowIn = rentIncomeEachYear
+	let cashFlowOut = math.add(homeMaintenanceCostsEachYear, loanPaymentEachYear)
+	cashFlowOut[0] = cashFlowOut[0] + initialCosts
 	const cashFlowNet = math.subtract(cashFlowIn, cashFlowOut)
-	return { netWorthBuyPV, cashFlowNet }
+
+	const LoanPaymentFactorsEachMonth = calcLoanPaymentFactorsEachMonth(loan, mortgageInterestRate, numYears)
+
+	return { 
+		time, 
+		timeMonths,
+		homeValueEachYear, 
+		downPayment, 
+		stampDuty, 
+		homePurchaseCosts, 
+		initialCosts, 
+		debtEachYear,
+		homeMaintenanceCostsEachYearCumulative,
+		homeSellingFeesEachYear, 
+		netWorthBuyPV, 
+		cashFlowIn,
+		rentIncomeEachYear,
+		cashFlowOut,
+		homeMaintenanceCostsEachYear,
+		loanPaymentEachYear,
+		cashFlowNet,
+		...LoanPaymentFactorsEachMonth,
+	}
 }
 
 export function getRentScenarioOutputs(props) {
-	console.log(props)
 	const {
 		amortization,
 		rentFirstMonth,
@@ -186,9 +234,10 @@ export function getRentScenarioOutputs(props) {
 	
 	const time = getRange(0, numYears);
 	const investmentEachYear = time.map(year => {
-		return Math.max(0, -buyScenarioCashFlowNet[year] - rentEachYear[year]);
+		return Math.max(0, - buyScenarioCashFlowNet[year] - rentEachYear[year]);
 	});
-	console.log(investmentEachYear)
+
+	// Renting networth should start at 0
 
 	const netWorthRent = investmentEachYear.reduce(
 		(accumulator, investmentThisYear) => {
@@ -203,9 +252,7 @@ export function getRentScenarioOutputs(props) {
 		},
 		[]
 	);
-	console.log(netWorthRent)
 
 	const netWorthRentPV = getPresentValueEachYear(netWorthRent, inflationRate)
-	console.log(netWorthRentPV)
-	return { netWorthRentPV }
+	return { rentEachYear, investmentEachYear, netWorthRentPV }
 }

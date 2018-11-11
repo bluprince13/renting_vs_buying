@@ -3,7 +3,11 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; }
+  box-sizing: inherit; 
+
+  min-height: 0;
+  min-width: 0;
+}
 
 html {
   font-size: 62.5%; }
@@ -25,4 +29,8 @@ body {
   content: "";
   clear: both;
   display: table;
+}
+
+.slick-prev:before, .slick-next:before { 
+  color:green !important;
 }

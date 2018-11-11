@@ -13,7 +13,8 @@ import {
   getLoanPaymentMonthly,
   getDebtEachMonth,
   getDebtEachYear,
-  getInitialCostsArray,
+  getValueArray,
+  setInitialZero,
 } from './formulas'
 
 test('gets percentage of a reference', () => {
@@ -78,6 +79,10 @@ test('gets debt each year', () => {
   expect(getDebtEachYear(100000, 6, 30).slice(-1)[0]).toBeCloseTo(0);
 });
 
-test('gets initial costs array', () => {
-  expect(getInitialCostsArray(1, 2, 2)).toEqual([3, 3, 3]);
+test('get value array', () => {
+  expect(getValueArray(1, 2)).toEqual([1, 1]);
+});
+
+test('set initial zero', () => {
+  expect(setInitialZero([1, 2])).toEqual([0, 1]);
 });

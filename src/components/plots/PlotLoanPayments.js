@@ -57,7 +57,7 @@ class PlotLoanPayments extends React.Component {
 							x: timeMonths,
 							y: debtEachMonth,
 							yaxis: 'y2',
-							name: 'debt',
+							name: 'Debt',
 							type: 'scatter',
 						}
 					]}

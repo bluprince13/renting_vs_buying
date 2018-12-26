@@ -1,5 +1,15 @@
 export default [
 	{
+		label: 'Number of years',
+		name: 'numYears',
+		min: 1,
+		max: 75,
+		step: 1,
+		defaultValue: 20,
+		type: 'range',
+		info: 'Number of years you want to project to.'
+	},
+	{
 		label: 'Home price',
 		name: 'homePrice',
 		min: 50000,

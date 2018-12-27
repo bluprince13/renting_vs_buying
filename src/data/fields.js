@@ -24,7 +24,7 @@ export default {
 			}
 		],
 
-	"Home Purchase":
+	"Buy scenario":
 		[
 			{
 				label: 'Home price',
@@ -137,7 +137,7 @@ export default {
 			},
 		],
 
-	"Renting": 
+	"Rent scenario": 
 		[
 			{
 				label: 'Initial monthly rent',

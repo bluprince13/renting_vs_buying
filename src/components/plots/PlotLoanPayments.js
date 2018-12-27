@@ -1,12 +1,8 @@
 import React from 'react';
 import StyledPlot from '../StyledPlot';
-import Annot from '../Annot';
 import Footer from '../Footer';
-
-import d3 from 'd3';
-const format2 = d3.format(".2s");
-const format3 = d3.format(".3s");
-
+import Annot from '../Annot';
+import { format2, format3 } from '../../functions/helpers';
 class PlotLoanPayments extends React.Component {
 	render() {
 		const { input, buyScenarioOutputs } = this.props

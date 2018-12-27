@@ -33,8 +33,8 @@ export function getFutureValue(presentValue, rate, numberOfCompoundingPeriods) {
 }
 
 export function getValueEachYear(presentValue, rate, numberOfCompoundingPeriods) {
-	const time = getRange(0, numberOfCompoundingPeriods);
-	const valueEachYear = time.map(year => {
+	const amortizationTime = getRange(0, numberOfCompoundingPeriods);
+	const valueEachYear = amortizationTime.map(year => {
 		return getFutureValue(presentValue, rate, year);
 	});
 	return valueEachYear
@@ -155,8 +155,8 @@ export function getLoanPaymentFactorsEachMonthPV(loanPaymentFactorsEachMonth, in
 
 export function getDebtEachYear(loan, mortgageInterestRate, amortization) {
 	const { debtEachMonth } = getLoanPaymentFactorsEachMonth(loan, mortgageInterestRate, amortization)
-	const time = getRange(0, amortization);
-	const debtEachYear = time.map(year => {
+	const amortizationTime = getRange(0, amortization);
+	const debtEachYear = amortizationTime.map(year => {
 		const month = 12 * year;
 		return debtEachMonth[month];
 	});
@@ -177,6 +177,7 @@ export function setInitialZero(inputArray) {
 
 export function getBuyScenarioOutputs(props) {
 	const {
+		numYears,
 		homePrice,
 		homeValueAppreciation,
 		amortization,
@@ -192,9 +193,9 @@ export function getBuyScenarioOutputs(props) {
 	} = props
 
 	// basics
-	const time = getRange(0, amortization);
+	const amortizationTime = getRange(0, amortization);
 	const numAmortizationMonths = amortization * 12
-	const timeMonths = getRange(0, numAmortizationMonths);
+	const amortizationTimeMonths = getRange(0, numAmortizationMonths);
 
 	// initial costs
 	const downPayment = getPercentage(homePrice, downPaymentPercentage);
@@ -240,8 +241,8 @@ export function getBuyScenarioOutputs(props) {
 
 	return {
 		amortization,
-		time,
-		timeMonths,
+		amortizationTime,
+		amortizationTimeMonths,
 
 		downPayment,
 		loan,
@@ -287,8 +288,8 @@ export function getRentScenarioOutputs(props) {
 
 	const rentEachYear = setInitialZero(getValueEachYear(rentFirstMonth * 12, rentAppreciation, amortization))
 
-	const time = getRange(0, amortization);
-	const investmentEachYear = time.map(year => {
+	const amortizationTime = getRange(0, amortization);
+	const investmentEachYear = amortizationTime.map(year => {
 		return Math.max(0, - buyScenarioCashFlowNet[year] - rentEachYear[year]);
 	});
 

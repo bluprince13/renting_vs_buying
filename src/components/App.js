@@ -32,11 +32,11 @@ const Content = styled.div`
 `
 
 const Sidebar = styled.div`
-  flex: 1;
+  flex: 4;
 `
 
 const Main = styled.div`
-  flex: 3;
+  flex: 10;
 
   display: flex;
   flex-direction: column;

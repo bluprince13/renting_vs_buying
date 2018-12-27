@@ -55,6 +55,7 @@ class PlotRentVsBuy extends React.Component {
 							showgrid: true,
 							zeroline: true,
 							showline: true,
+							rangemode: 'tozero',
 						},
 						autosize: true
 					}}

@@ -1,7 +1,7 @@
 import React from 'react';
-import Plot from 'react-plotly.js';
 import * as math from 'mathjs';
 import Footer from '../Footer';
+import StyledPlot from '../StyledPlot';
 
 class PlotRentVsBuy extends React.Component {
 	render() {
@@ -12,7 +12,7 @@ class PlotRentVsBuy extends React.Component {
 
 		return (
 			<div>
-				<Plot
+				<StyledPlot
 					data={[
 						{
 							x: time,
@@ -55,7 +55,8 @@ class PlotRentVsBuy extends React.Component {
 							showgrid: true,
 							zeroline: true,
 							showline: true,
-						}
+						},
+						autosize: true
 					}}
 				/>
 				<Footer>

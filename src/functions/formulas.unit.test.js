@@ -16,6 +16,7 @@ import {
   getDebtEachYear,
   getValueArray,
   setInitialZero,
+  adjustToRequiredMax,
 } from './formulas'
 
 test('gets percentage of a reference', () => {
@@ -104,4 +105,14 @@ test('gets loan payment factors each month', () => {
   expect(loanPaymentSum).toBeCloseTo(599.55 * 30 * 12, 0);
   expect(interestSum).toBeCloseTo(loanPaymentSum - principalSum);
   expect(principalSum).toBeCloseTo(loan);
+});
+
+test('adjust to required max', () => {
+  const shortArray = [0, 1, 2]
+  const longArray = [0, 1, 2, 3, 4, 5, 6, 7]
+  const equalArray = [0, 1, 2, 3, 4, 5]
+  const requiredMax = 5
+  expect(adjustToRequiredMax(longArray, requiredMax)).toEqual([0, 1, 2, 3, 4, 5]);
+  expect(adjustToRequiredMax(shortArray, requiredMax)).toEqual([0, 1, 2, 0, 0, 0]);
+  expect(adjustToRequiredMax(equalArray, requiredMax)).toEqual([0, 1, 2, 3, 4, 5]);
 });

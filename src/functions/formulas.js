@@ -175,6 +175,21 @@ export function setInitialZero(inputArray) {
 	return outputArray
 }
 
+export function adjustToRequiredMax(inputArray, requiredMax) {
+	let outputArray = []
+	
+	if (inputArray.length > requiredMax + 1) {
+		outputArray = inputArray.slice(0, requiredMax + 1)
+	} else if (inputArray.length < requiredMax + 1) {
+		const len = requiredMax + 1 - inputArray.length
+		outputArray = inputArray.concat(Array(len).fill(0));
+	} else {
+		outputArray = inputArray
+	}
+
+	return outputArray
+}
+
 export function getBuyScenarioOutputs(props) {
 	const {
 		numYears,
@@ -204,15 +219,15 @@ export function getBuyScenarioOutputs(props) {
 	const initialCosts = downPayment + stampDuty + homePurchaseCosts
 
 	// home value and debt
-	const homeValueEachYear = getValueEachYear(homePrice, homeValueAppreciation, amortization);
-	const debtEachYear = getDebtEachYear(loan, mortgageInterestRate, amortization)
+	const homeValueEachYear = getValueEachYear(homePrice, homeValueAppreciation, numYears);
+	const debtEachYear = adjustToRequiredMax(getDebtEachYear(loan, mortgageInterestRate, amortization), numYears)
 
 	// in and out each year
 	const homeMaintenanceCostsEachYear = setInitialZero(
 		getPercentageEachYear(homeValueEachYear, homeMaintenancePercentage)
 	)
 	const rentIncomeEachYear = setInitialZero(
-		getValueEachYear(12 * rentIncomeFirstMonth, rentAppreciation, amortization)
+		getValueEachYear(12 * rentIncomeFirstMonth, rentAppreciation, numYears)
 	)
 
 	// selling fees
@@ -228,7 +243,7 @@ export function getBuyScenarioOutputs(props) {
 	const loanPaymentMonthly = getLoanPaymentMonthly(loan, mortgageInterestRate, amortization)
 	const loanPaymentYearly = loanPaymentMonthly * 12
 	let loanPaymentEachYear = Array(amortization + 1).fill(loanPaymentYearly);
-	loanPaymentEachYear = setInitialZero(loanPaymentEachYear);
+	loanPaymentEachYear = adjustToRequiredMax(setInitialZero(loanPaymentEachYear), numYears);
 
 	const cashFlowIn = rentIncomeEachYear
 	let cashFlowOut = math.add(homeMaintenanceCostsEachYear, loanPaymentEachYear)
@@ -278,7 +293,7 @@ export function getBuyScenarioOutputs(props) {
 
 export function getRentScenarioOutputs(props) {
 	const {
-		amortization,
+		numYears,
 		rentFirstMonth,
 		rentAppreciation,
 		investmentReturnRate,
@@ -286,10 +301,10 @@ export function getRentScenarioOutputs(props) {
 		buyScenarioCashFlowNet
 	} = props
 
-	const rentEachYear = setInitialZero(getValueEachYear(rentFirstMonth * 12, rentAppreciation, amortization))
+	const rentEachYear = setInitialZero(getValueEachYear(rentFirstMonth * 12, rentAppreciation, numYears))
 
-	const amortizationTime = getRange(0, amortization);
-	const investmentEachYear = amortizationTime.map(year => {
+	const time = getRange(0, numYears);
+	const investmentEachYear = time.map(year => {
 		return Math.max(0, - buyScenarioCashFlowNet[year] - rentEachYear[year]);
 	});
 

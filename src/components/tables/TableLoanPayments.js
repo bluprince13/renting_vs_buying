@@ -9,9 +9,9 @@ const format = d3.format(".3s");
 class TableLoanPayments extends React.Component {
 	render() {
 		const { buyScenarioOutputs } = this.props
-		const { timeMonths, interestEachMonth, principalEachMonth, loanPaymentEachMonth, debtEachMonth } = buyScenarioOutputs
+		const { amortizationTimeMonths, interestEachMonth, principalEachMonth, loanPaymentEachMonth, debtEachMonth } = buyScenarioOutputs
 
-		const data = timeMonths.map((month) => {
+		const data = amortizationTimeMonths.map((month) => {
 			return {
 				month: month,
 				interestEachMonth: interestEachMonth[month],

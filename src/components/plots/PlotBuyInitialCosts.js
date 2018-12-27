@@ -1,6 +1,8 @@
 import React from 'react';
 import StyledPlot from '../StyledPlot';
 import Footer from '../Footer';
+import Annot from '../Annot';
+import { format2, format3 } from '../../functions/helpers';
 
 class PlotBuyInitialCosts extends React.Component {
 	render() {
@@ -40,6 +42,9 @@ class PlotBuyInitialCosts extends React.Component {
 					}
 				/>
 				<Footer>
+					<p>
+						The initial costs of <Annot>{format2(initialCosts)}</ Annot> in the buy scenario make for the initial investment in the rent scenario.
+					</p>
 				</Footer>
 			</div>
 		);

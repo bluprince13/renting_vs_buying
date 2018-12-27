@@ -1,6 +1,6 @@
 import React from 'react';
-import Plot from 'react-plotly.js';
 import * as math from 'mathjs';
+import StyledPlot from '../StyledPlot';
 import Footer from '../Footer';
 
 class PlotRentInvestment extends React.Component {
@@ -19,7 +19,7 @@ class PlotRentInvestment extends React.Component {
 
 		return (
 			<div>
-				<Plot
+				<StyledPlot
 					data={[
 						{
 							x: time,

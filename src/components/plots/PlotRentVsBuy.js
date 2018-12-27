@@ -1,7 +1,7 @@
 import React from 'react';
 import * as math from 'mathjs';
-import Footer from '../Footer';
 import StyledPlot from '../StyledPlot';
+import Footer from '../Footer';
 
 class PlotRentVsBuy extends React.Component {
 	render() {

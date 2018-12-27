@@ -1,5 +1,5 @@
 import React from 'react';
-import Plot from 'react-plotly.js';
+import StyledPlot from '../StyledPlot';
 import Footer from '../Footer';
 
 class PlotBuyInitialCosts extends React.Component {
@@ -9,7 +9,7 @@ class PlotBuyInitialCosts extends React.Component {
 
 		return (
 			<div>
-				<Plot
+				<StyledPlot
 					data={[
 						{
 							values: [downPayment, stampDuty, homePurchaseCosts],

@@ -1,5 +1,5 @@
 import React from 'react';
-import Plot from 'react-plotly.js';
+import StyledPlot from '../StyledPlot';
 import Footer from '../Footer';
 
 import d3 from 'd3';
@@ -29,7 +29,7 @@ class PlotLoanPayments extends React.Component {
 
 		return (
 			<div>
-				<Plot
+				<StyledPlot
 					data={[
 						{
 							x: timeMonths,

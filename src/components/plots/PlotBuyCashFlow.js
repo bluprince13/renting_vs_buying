@@ -1,6 +1,6 @@
 import React from 'react';
-import Plot from 'react-plotly.js';
 import * as math from 'mathjs';
+import StyledPlot from '../StyledPlot';
 import Footer from '../Footer';
 
 class PlotBuyCashFlow extends React.Component {
@@ -21,7 +21,7 @@ class PlotBuyCashFlow extends React.Component {
 
 		return (
 			<div>
-				<Plot
+				<StyledPlot
 					data={[
 						{
 							x: time,

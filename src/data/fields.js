@@ -7,7 +7,7 @@ export default {
 				min: 1,
 				max: 75,
 				step: 1,
-				defaultValue: 20,
+				defaultValue: 30,
 				type: 'range',
 				info: 'Number of years you want to project to.'
 			},
@@ -163,7 +163,7 @@ export default {
 			},
 			{
 				label: 'Expected annual investment return',
-				name: 'investmentReturn',
+				name: 'investmentReturnRate',
 				min: 0,
 				max: 20,
 				step: 0.1,

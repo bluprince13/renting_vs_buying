@@ -8,9 +8,11 @@ import {
   getPresentValue,
   getFutureValue,
   getValueEachYear,
+  getValueEachYearWithInvestment,
   getPresentValueEachPeriod,
   getDiscountFactor,
   getLoanPaymentMonthly,
+  getLoanPaymentFactorsEachMonth,
   getDebtEachYear,
   getValueArray,
   setInitialZero,
@@ -53,6 +55,12 @@ test('gets value each year', () => {
   expect(getValueEachYear(1000, 10, 2)[1]).toBeCloseTo(1100);
 });
 
+test('gets value each year with investment', () => {
+  const investmentEachYear = [1000, 2000]
+  const rate = 10
+  expect(getValueEachYearWithInvestment(investmentEachYear, rate)).toEqual([1100, 3410]);
+});
+
 test('gets present value each year', () => {
   expect(getPresentValueEachPeriod([1000, 1100], 10)[0]).toBeCloseTo(1000);
   expect(getPresentValueEachPeriod([1000, 1100], 10)[1]).toBeCloseTo(1000);
@@ -77,4 +85,23 @@ test('get value array', () => {
 
 test('set initial zero', () => {
   expect(setInitialZero([1, 2])).toEqual([0, 1]);
+});
+
+test('gets loan payment factors each month', () => {
+  const loan = 100000
+  const mortgageInterestRate = 6
+  const amortization = 30
+  const loanPaymentFactorsEachMonth = getLoanPaymentFactorsEachMonth(loan, mortgageInterestRate, amortization)
+  
+  const {
+    loanPaymentMonthly,
+    loanPaymentSum,
+    interestSum,
+    principalSum 
+  } = loanPaymentFactorsEachMonth;  
+  
+  expect(loanPaymentMonthly).toBeCloseTo(599.55);
+  expect(loanPaymentSum).toBeCloseTo(599.55 * 30 * 12, 0);
+  expect(interestSum).toBeCloseTo(loanPaymentSum - principalSum);
+  expect(principalSum).toBeCloseTo(loan);
 });

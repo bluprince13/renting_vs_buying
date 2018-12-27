@@ -2,7 +2,14 @@ import ReduxQuerySync from 'redux-query-sync'
 import { CHANGE_INPUT } from "../actions";
 import fields from '../data/fields'
 
-const params = fields.reduce(
+const allFields = Object.keys(fields).reduce(
+    (arr, key) => {
+        arr = arr.concat(fields[key])
+        return arr
+    }, []
+)
+
+const params = allFields.reduce(
     (obj, item) => {
         const { name, defaultValue } = item 
         obj[name] = {

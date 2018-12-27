@@ -9,8 +9,17 @@ const StyledForm = styled.form`
 	height: 100%
 `;
 
-const renderFields = fields.map(props => {
+const renderFields = set => set.map(props => {
 	return <InputElement key={props.name} props={props} />
+});
+
+const renderFieldSets = Object.keys(fields).map(key => {
+	return (
+		<fieldset key={key}>
+			<legend>{key}</legend>
+			{renderFields(fields[key])}
+		</fieldset>
+	)
 });
 
 /**
@@ -21,7 +30,7 @@ const renderFields = fields.map(props => {
  */
 class InputForm extends Component {
 	render() {
-		return <StyledForm>{renderFields}</StyledForm>;
+		return <StyledForm>{renderFieldSets}</StyledForm>;
 	}
 }
 

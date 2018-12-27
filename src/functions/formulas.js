@@ -43,13 +43,13 @@ export function getValueEachYear(presentValue, rate, numberOfCompoundingPeriods)
 export function getValueEachYearWithInvestment(investmentEachYear, rate) {
 	const valueEachYear = investmentEachYear.reduce(
 		(arr, investmentThisYear) => {
-			let capitalThisYear = (arr.slice(-1)[0] || 0) + investmentThisYear;
+			let capitalThisYear = (arr.slice(-1)[0] || 0);
 			const returnsThisYear = getSimpleInterest(
 				capitalThisYear,
 				rate,
 				1
 			);
-			const capitalNextYear = capitalThisYear + returnsThisYear;
+			const capitalNextYear = capitalThisYear + returnsThisYear + investmentThisYear;
 			return [...arr, capitalNextYear];
 		},
 		[]

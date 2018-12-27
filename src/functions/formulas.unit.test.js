@@ -58,7 +58,7 @@ test('gets value each year', () => {
 test('gets value each year with investment', () => {
   const investmentEachYear = [1000, 2000]
   const rate = 10
-  expect(getValueEachYearWithInvestment(investmentEachYear, rate)).toEqual([1100, 3410]);
+  expect(getValueEachYearWithInvestment(investmentEachYear, rate)).toEqual([1000, 3100]);
 });
 
 test('gets present value each year', () => {

@@ -4,7 +4,7 @@ import "react-table/react-table.css";
 import d3 from 'd3';
 import Footer from '../Footer';
 
-const format = d3.format(".3s");
+const format = d3.format(".5s");
 
 class TableLoanPayments extends React.Component {
 	render() {

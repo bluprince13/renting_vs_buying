@@ -209,6 +209,7 @@ export function getBuyScenarioOutputs(props) {
 
 	// basics
 	const amortizationTime = getRange(0, amortization);
+	const totalTime = getRange(0, numYears);
 	const numAmortizationMonths = amortization * 12
 	const amortizationTimeMonths = getRange(0, numAmortizationMonths);
 
@@ -257,6 +258,7 @@ export function getBuyScenarioOutputs(props) {
 	return {
 		amortization,
 		amortizationTime,
+		totalTime,
 		amortizationTimeMonths,
 
 		downPayment,

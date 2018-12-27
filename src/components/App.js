@@ -12,15 +12,11 @@ const Layout = styled.div`
 `
 
 const Header = styled.div`
-  height: 10%;
-
   padding: 1rem;
   text-align: center;
   background: #1abc9c;
   color: white;
   font-size: 3rem;
-
-  margin-bottom: 2rem;
 `
 
 const Content = styled.div`

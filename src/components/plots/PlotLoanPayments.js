@@ -1,5 +1,6 @@
 import React from 'react';
 import StyledPlot from '../StyledPlot';
+import Annot from '../Annot';
 import Footer from '../Footer';
 
 import d3 from 'd3';
@@ -88,7 +89,7 @@ class PlotLoanPayments extends React.Component {
 				/>
 				<Footer>
 					<p>
-						{`An amortized loan is a loan where the periodic payment consists of both principal and interest. Interest is the cost of 'renting' money. The ${format3(loan)} loan required to be paid over ${Number.parseInt(amortization)} years with a mortage interest rate of ${mortgageInterestRate}% results in a fixed monthly payment of ${format3(loanPaymentMonthly)}. The first month's payment consists of ${format3(interestEachMonth[1])} in interest which is ${format2(interestEachMonth[1]*100/loanPaymentMonthly)}% of the monthly payment. Over time as the debt reduces, the interest that you pay also falls. In nominal terms, i.e., not accounting for inflation, the total interest paid over ${Number.parseInt(amortization)} years is ${format2(interestSum*100/loanPaymentSum)}% of the total cost of the mortgage which is ${format3(loanPaymentSum)}. However, since more interest is paid upfront, accounting for inflation means that the interest paid is ${format2(interestPVSum*100/loanPaymentPVSum)}% of the present value of the total cost of the mortgage which is ${format3(loanPaymentPVSum)}.`}
+						An amortized loan is a loan where the periodic payment consists of both principal and interest. Interest is the cost of 'renting' money. The <Annot>{format3(loan)}</ Annot> loan required to be paid over <Annot>{Number.parseInt(amortization)}</ Annot> years with a mortage interest rate of <Annot>{mortgageInterestRate}%</Annot> results in a fixed monthly payment of <Annot>{format3(loanPaymentMonthly)}</Annot>. The first month's payment consists of <Annot>{format3(interestEachMonth[1])}</Annot> in interest which is <Annot>{format2(interestEachMonth[1]*100/loanPaymentMonthly)}%</Annot> of the monthly payment. Over time as the debt reduces, the interest that you pay also falls. In nominal terms, i.e., not accounting for inflation, the total interest paid over <Annot>{Number.parseInt(amortization)}</Annot> years is <Annot>{format2(interestSum*100/loanPaymentSum)}%</Annot> of the <Annot>{format3(loanPaymentSum)}</Annot> total cost of the mortgage. However, accounting for inflation, the present value of the total cost of the mortgage is <Annot>{format3(loanPaymentPVSum)}</Annot>. The interest paid is <Annot>{format2(interestPVSum*100/loanPaymentPVSum)}% </Annot> of this since more interest is paid in the earlier years when money has more value.
 					</p>
 				</Footer>
 			</div>

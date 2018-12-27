@@ -14,8 +14,7 @@ const Layout = styled.div`
 const Header = styled.div`
   padding: 1rem;
   text-align: center;
-  background: #1abc9c;
-  color: white;
+  background: green;
   font-size: 3rem;
 `
 
@@ -49,7 +48,7 @@ class App extends Component {
 		return (
 			<Layout>
         <Header>
-			    <Link onClick={this.forceUpdate} to='/' style={{ textDecoration: 'none' }}>Renting vs. buying a house</Link>
+			    <Link onClick={this.forceUpdate} to='/' style={{ textDecoration: 'none', color: "white"}}>Renting vs. buying a house</Link>
         </Header>
         <Content>
           <Sidebar>

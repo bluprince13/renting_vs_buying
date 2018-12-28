@@ -92,7 +92,7 @@ export default {
 				unit: ''
 			},
 			{
-				label: 'Initial monthly rental income',
+				label: '1st month rental income',
 				name: 'rentIncomeFirstMonth',
 				min: 0,
 				max: 5000,

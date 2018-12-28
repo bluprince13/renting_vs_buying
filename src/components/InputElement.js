@@ -82,9 +82,10 @@ const InputElement = props => {
 					min={min}
 					max={max}
 					step={step}
-					type={type}
+					type='range'
 					onChange={(event) => changeInput({[name]: Number(event.target.value) })}
 					value={value}
+					style={{width: '100%'}}
 				/>
 			</StyledSlider>
 			<StyledText>
@@ -97,6 +98,7 @@ const InputElement = props => {
 					step={step}
 					onChange={(event) => changeInput({[name]: Number(event.target.value) })}
 					value={value}
+					style={{width: '70%'}}
 				/>
 				<label style={{ marginLeft: '0.5rem' }}>{unit}</label>
 			</StyledText>

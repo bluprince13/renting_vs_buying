@@ -98,7 +98,7 @@ const InputElement = props => {
 					step={step}
 					onChange={(event) => changeInput({[name]: Number(event.target.value) })}
 					value={value}
-					style={{width: '70%'}}
+					style={{width: '65%'}}
 				/>
 				<label style={{ marginLeft: '0.5rem' }}>{unit}</label>
 			</StyledText>

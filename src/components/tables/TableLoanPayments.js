@@ -4,6 +4,10 @@ import "react-table/react-table.css";
 import d3 from 'd3';
 
 const format = d3.format(".5s");
+const style = {
+	textAlign: 'center'
+}
+const Cell = ({ value }) => <div>{format(value)}</div>
 
 class TableLoanPayments extends React.Component {
 	render() {
@@ -29,41 +33,31 @@ class TableLoanPayments extends React.Component {
 						{
 							Header: "Month",
 							accessor: "month",
-							style: {
-								textAlign: 'center'
-							},
+							style
 						},
 						{
 							Header: "Loan payment",
 							accessor: "loanPaymentEachMonth",
-							style: {
-								textAlign: 'center'
-							},
-							Cell: ({ value }) => <div>{format(value)}</div>
+							style,
+							Cell
 						},
 						{
 							Header: "Principal",
 							accessor: "principalEachMonth",
-							style: {
-								textAlign: 'center'
-							},
-							Cell: ({ value }) => <div>{format(value)}</div>
+							style,
+							Cell
 						},
 						{
 							Header: "Interest",
 							accessor: "interestEachMonth",
-							style: {
-								textAlign: 'center'
-							},
-							Cell: ({ value }) => <div>{format(value)}</div>
+							style,
+							Cell
 						},
 						{
 							Header: "Debt",
 							accessor: "debtEachMonth",
-							style: {
-								textAlign: 'center'
-							},
-							Cell: ({ value }) => <div>{format(value)}</div>
+							style,
+							Cell
 						}
 					]}
 					defaultPageSize={10}

@@ -323,6 +323,7 @@ export function getRentScenarioOutputs(props) {
 	const netWorthRentPV = getPresentValueEachPeriod(netWorthRent, inflationRate)
 
 	return {
+		time,
 		rentEachYear,
 		investmentEachYear,
 		netWorthRent,

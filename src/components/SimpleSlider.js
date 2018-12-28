@@ -7,6 +7,8 @@ import PlotLoanPayments from './plots/PlotLoanPayments';
 import PlotBuyCashFlow from './plots/PlotBuyCashFlow';
 import PlotRentInvestment from './plots/PlotRentInvestment';
 import TableLoanPayments from './tables/TableLoanPayments';
+import TableBuyScenario from './tables/TableBuyScenario';
+import TableRentScenario from './tables/TableRentScenario';
 
 import {
 	getBuyScenarioOutputs,
@@ -53,6 +55,12 @@ class SimpleSlider extends Component {
             </div>
             <div>
               <TableLoanPayments input={input} buyScenarioOutputs={buyScenarioOutputs} />
+            </div>
+            <div>
+              <TableBuyScenario input={input} buyScenarioOutputs={buyScenarioOutputs} />
+            </div>
+            <div>
+              <TableRentScenario input={input} buyScenarioOutputs={buyScenarioOutputs} rentScenarioOutputs={rentScenarioOutputs} />
             </div>
           </Slider>
         </div>

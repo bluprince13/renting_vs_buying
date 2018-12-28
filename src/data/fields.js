@@ -22,7 +22,18 @@ export default {
 				type: 'range',
 				info: '',
 				unit: '%'
-			}
+			},
+			{
+				label: 'Annual rent appreciation',
+				name: 'rentAppreciation',
+				min: 0,
+				max: 15,
+				step: 0.1,
+				defaultValue: 2,
+				type: 'range',
+				info: 'The same rate will be applied to rental costs in the rent scenario and any rental income in the buy scenario.',
+				unit: '%'
+			},
 		],
 
 	"Buy scenario":
@@ -93,14 +104,14 @@ export default {
 				unit: ''
 			},
 			{
-				label: '1st month rental income',
+				label: 'Initial monthly rental income',
 				name: 'rentIncomeFirstMonth',
 				min: 0,
 				max: 5000,
 				step: 50,
 				defaultValue: 0,
 				type: 'range',
-				info: 'This will be assumed to increase annually at the specified rate of increase',
+				info: 'A net positive cash flow, if any, will be accounted for in the net worth. However, the cash asset is assumed not to earn any interest',
 				unit: ''
 			},
 			{
@@ -152,18 +163,7 @@ export default {
 				unit: ''
 			},
 			{
-				label: 'Annual appreciation in rent',
-				name: 'rentAppreciation',
-				min: 0,
-				max: 15,
-				step: 0.1,
-				defaultValue: 2,
-				type: 'range',
-				info: '',
-				unit: '%'
-			},
-			{
-				label: 'Expected annual investment return',
+				label: 'Annual investment return',
 				name: 'investmentReturnRate',
 				min: 0,
 				max: 20,

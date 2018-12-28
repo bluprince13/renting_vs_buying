@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import InputForm from './InputForm';
@@ -64,6 +65,11 @@ const Carousel = styled.div`
 `
 
 class App extends Component {
+  componentDidMount()  {
+    ReactGA.initialize('UA-35322373-2');
+    ReactGA.pageview('/');
+  }
+
 	render() {
 		return (
 			<Layout>

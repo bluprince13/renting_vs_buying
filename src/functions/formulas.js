@@ -177,7 +177,7 @@ export function setInitialZero(inputArray) {
 
 export function adjustToRequiredMax(inputArray, requiredMax) {
 	let outputArray = []
-	
+
 	if (inputArray.length > requiredMax + 1) {
 		outputArray = inputArray.slice(0, requiredMax + 1)
 	} else if (inputArray.length < requiredMax + 1) {
@@ -234,12 +234,6 @@ export function getBuyScenarioOutputs(props) {
 	// selling fees
 	const homeSellingFeesEachYear = getPercentageEachYear(homeValueEachYear, homeSellingFeesPercentage)
 
-	// net worth
-	const netWorthBuyPos = homeValueEachYear
-	const netWorthBuyNeg = math.add(debtEachYear, homeSellingFeesEachYear)
-	const netWorthBuy = math.subtract(netWorthBuyPos, netWorthBuyNeg)
-	const netWorthBuyPV = getPresentValueEachPeriod(netWorthBuy, inflationRate);
-
 	// cash flow
 	const loanPaymentMonthly = getLoanPaymentMonthly(loan, mortgageInterestRate, amortization)
 	const loanPaymentYearly = loanPaymentMonthly * 12
@@ -250,6 +244,19 @@ export function getBuyScenarioOutputs(props) {
 	let cashFlowOut = math.add(homeMaintenanceCostsEachYear, loanPaymentEachYear)
 	cashFlowOut[0] = cashFlowOut[0] + initialCosts
 	const cashFlowNet = math.subtract(cashFlowIn, cashFlowOut)
+	const cashFlowNetPosCumulative = getCumulative(cashFlowNet.map((cash) => {
+		if (cash > 0) {
+			return cash
+		} else {
+			return 0
+		}
+	}))
+
+	// net worth
+	const netWorthBuyPos = math.add(homeValueEachYear, cashFlowNetPosCumulative)
+	const netWorthBuyNeg = math.add(debtEachYear, homeSellingFeesEachYear)
+	const netWorthBuy = math.subtract(netWorthBuyPos, netWorthBuyNeg)
+	const netWorthBuyPV = getPresentValueEachPeriod(netWorthBuy, inflationRate);
 
 	// additional detail regarding interest paid
 	const loanPaymentFactorsEachMonth = getLoanPaymentFactorsEachMonth(loan, mortgageInterestRate, amortization)
@@ -275,19 +282,20 @@ export function getBuyScenarioOutputs(props) {
 
 		homeSellingFeesEachYear,
 
+		loanPaymentMonthly,
+		loanPaymentYearly,
+		loanPaymentEachYear,
+
+		cashFlowIn,
+		cashFlowOut,
+		cashFlowNet,
+		cashFlowNetPosCumulative,
+
 		netWorthBuyPos,
 		netWorthBuyNeg,
 		netWorthBuy,
 		netWorthBuyPV,
 
-		cashFlowIn,
-		cashFlowOut,
-		cashFlowNet,
-
-		loanPaymentMonthly,
-		loanPaymentYearly,
-		loanPaymentEachYear,
-		
 		...loanPaymentFactorsEachMonth,
 		...loanPaymentFactorsEachMonthPV,
 	}
@@ -310,13 +318,14 @@ export function getRentScenarioOutputs(props) {
 		return Math.max(0, - buyScenarioCashFlowNet[year] - rentEachYear[year]);
 	});
 
-	const netWorthRent = getValueEachYearWithInvestment(investmentEachYear, investmentReturnRate) 
+	const netWorthRent = getValueEachYearWithInvestment(investmentEachYear, investmentReturnRate)
 
 	const netWorthRentPV = getPresentValueEachPeriod(netWorthRent, inflationRate)
-	
-	return { 
-		rentEachYear, 
-		investmentEachYear, 
-		netWorthRent, 
-		netWorthRentPV }
+
+	return {
+		rentEachYear,
+		investmentEachYear,
+		netWorthRent,
+		netWorthRentPV
+	}
 }

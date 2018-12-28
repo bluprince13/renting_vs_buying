@@ -2,14 +2,15 @@ export default {
 	"General":
 		[
 			{
-				label: 'Number of years',
+				label: 'Projection period',
 				name: 'numYears',
 				min: 1,
 				max: 75,
 				step: 1,
 				defaultValue: 30,
 				type: 'range',
-				info: 'Number of years you want to project to.'
+				info: 'Number of years you want to project to.',
+				unit: 'years'
 			},
 			{
 				label: 'Inflation rate',
@@ -59,7 +60,7 @@ export default {
 				unit: '%'
 			},
 			{
-				label: 'Amortization',
+				label: 'Amortization period',
 				name: 'amortization',
 				min: 0,
 				max: 40,

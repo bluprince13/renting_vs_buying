@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import InputForm from './InputForm';
 import SimpleSlider from './SimpleSlider';
+import { media } from '../style';
 
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-
   height: 100vh;
+
+  ${media.tablet`
+    height: 100%;
+  `}
 `
 
 const Header = styled.div`
@@ -17,21 +21,37 @@ const Header = styled.div`
   background: green;
   font-size: 3rem;
 `
+  // ${media.desktop`background: dodgerblue;`}
+  // ${media.tablet`background: mediumseagreen;`}
+  // ${media.phone`background: palevioletred;`}
 
 const Content = styled.div`
   flex: 1;
 
   display: flex;
-  flex-direction: row;
   align-items: stretch;
+
+  ${media.desktop`
+    flex-direction: row;
+  `}
+  ${media.tablet`
+    flex-direction: column;
+  `}
 `
 
 const Sidebar = styled.div`
-  flex: 4;
+  ${media.desktop`
+    width: 30rem;
+]`}
+
+  ${media.tablet`
+    margin: auto
+    width: 80%;
+`}
 `
 
 const Main = styled.div`
-  flex: 10;
+  flex: 1;
 
   display: flex;
   flex-direction: column;

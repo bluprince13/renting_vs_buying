@@ -18,16 +18,16 @@ export default {
 				min: -5,
 				max: 10,
 				step: 0.1,
-				defaultValue: 3,
+				defaultValue: 2,
 				type: 'range',
-				info: '',
+				info: 'Inflation is a measure of how much prices of goods and services have gone up over time',
 				unit: '%'
 			},
 			{
 				label: 'Annual rent appreciation',
 				name: 'rentAppreciation',
 				min: 0,
-				max: 15,
+				max: 5,
 				step: 0.1,
 				defaultValue: 2,
 				type: 'range',
@@ -44,7 +44,7 @@ export default {
 				min: 50000,
 				max: 1000000,
 				step: 1000,
-				defaultValue: 200000,
+				defaultValue: 125000,
 				type: 'range',
 				info: 'The home price excluding any costs incurred in purchasing it.'
 			},
@@ -54,7 +54,7 @@ export default {
 				min: 0,
 				max: 25,
 				step: 0.1,
-				defaultValue: 5,
+				defaultValue: 2,
 				type: 'range',
 				info: 'The annual interest rate for the mortgage over your term, as quoted by your lender.',
 				unit: '%'
@@ -64,19 +64,19 @@ export default {
 				name: 'downPaymentPercentage',
 				min: 0,
 				max: 100,
-				step: 0.1,
-				defaultValue: 10,
+				step: 1,
+				defaultValue: 20,
 				type: 'range',
 				info: 'The amount of money, as a percentage of home price, you will put towards the purchase of your home upfront that will not be covered by your mortgage.',
 				unit: '%'
 			},
 			{
-				label: 'Amortization period',
+				label: 'Mortgage term',
 				name: 'amortization',
 				min: 0,
 				max: 40,
 				step: 1,
-				defaultValue: 20,
+				defaultValue: 25,
 				type: 'range',
 				info: 'The total length of time you will take to pay off your mortgage.',
 				unit: 'years'
@@ -85,11 +85,11 @@ export default {
 				label: 'Stamp duty',
 				name: 'stampDutyPercentage',
 				min: 0,
-				max: 20,
+				max: 10,
 				step: 0.1,
 				defaultValue: 0,
 				type: 'range',
-				info: '',
+				info: 'Tax owed to the government.',
 				unit: '%'
 			},
 			{
@@ -100,7 +100,7 @@ export default {
 				step: 100,
 				defaultValue: 3000,
 				type: 'range',
-				info: '',
+				info: "There are a number of additional costs when you purchase a house. This includes the surveyor's fee, legal/conveyancing fees etc.",
 				unit: ''
 			},
 			{
@@ -108,7 +108,7 @@ export default {
 				name: 'rentIncomeFirstMonth',
 				min: 0,
 				max: 5000,
-				step: 50,
+				step: 100,
 				defaultValue: 0,
 				type: 'range',
 				info: 'A net positive cash flow, if any, will be accounted for in the net worth. However, the cash asset is assumed not to earn any interest',
@@ -118,11 +118,11 @@ export default {
 				label: 'Annual home value appreciation',
 				name: 'homeValueAppreciation',
 				min: -5,
-				max: 15,
+				max: 10,
 				step: 0.1,
 				defaultValue: 2,
 				type: 'range',
-				info: '',
+				info: 'House prices generally tend to increase in the long term.',
 				unit: '%'
 			},
 			{
@@ -133,7 +133,7 @@ export default {
 				step: 0.1,
 				defaultValue: 1,
 				type: 'range',
-				info: '',
+				info: 'A general rule of thumb is to set aside 1% of your home price to cover maintenance and repairs.',
 				unit: '%'
 			},
 			{
@@ -142,9 +142,9 @@ export default {
 				min: 0,
 				max: 10,
 				step: 0.1,
-				defaultValue: 5,
+				defaultValue: 2,
 				type: 'range',
-				info: '',
+				info: 'If and when you decide to sell your home, there will be estate agent fees to pay.',
 				unit: '%'
 			},
 		],
@@ -157,7 +157,7 @@ export default {
 				min: 50,
 				max: 1500,
 				step: 10,
-				defaultValue: 400,
+				defaultValue: 320,
 				type: 'range',
 				info: '',
 				unit: ''

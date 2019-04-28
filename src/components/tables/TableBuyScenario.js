@@ -1,68 +1,45 @@
 import React from "react";
 import Table from "./Table";
 
-const columnNames = ["year", "homeValueEachYear", "debtEachYear", "homeMaintenanceCostsEachYear", "rentIncomeEachYear", "homeSellingFeesEachYear", "loanPaymentEachYear", "cashFlowIn", "cashFlowOut", "cashFlowNet", "cashFlowNetPosCumulative", "netWorthBuyPos", "netWorthBuyNeg", "netWorthBuy", "netWorthBuyPV"]
-const title = "Buy scenario"
+const columnNames = [
+	"year",
+	"homeValueEachYear",
+	"debtEachYear",
+	"homeMaintenanceCostsEachYear",
+	"rentIncomeEachYear",
+	"homeSellingFeesEachYear",
+	"loanPaymentEachYear",
+	"cashFlowIn",
+	"cashFlowOut",
+	"cashFlowNet",
+	"cashFlowNetPosCumulative",
+	"netWorthBuyPos",
+	"netWorthBuyNeg",
+	"netWorthBuy",
+	"netWorthBuyPV"
+];
+const title = "Buy scenario";
 class TableBuyScenario extends React.Component {
 	render() {
 		const { buyScenarioOutputs } = this.props;
-		const {
-			totalTime,
-
-			homeValueEachYear,
-			debtEachYear,
-
-			homeMaintenanceCostsEachYear,
-			rentIncomeEachYear,
-
-			homeSellingFeesEachYear,
-
-			loanPaymentEachYear,
-
-			cashFlowIn,
-			cashFlowOut,
-			cashFlowNet,
-			cashFlowNetPosCumulative,
-
-			netWorthBuyPos,
-			netWorthBuyNeg,
-			netWorthBuy,
-			netWorthBuyPV
-		} = buyScenarioOutputs;
+		const { totalTime } = buyScenarioOutputs;
 
 		const data = totalTime.map(year => {
+			const values = columnNames
+				.slice(1)
+				.reduce((accumulator, columnName) => {
+					accumulator[columnName] =
+						buyScenarioOutputs[columnName][year];
+					return accumulator;
+				}, {});
+
 			return {
-				year: year,
-
-				homeValueEachYear: homeValueEachYear[year],
-				debtEachYear: debtEachYear[year],
-
-				homeMaintenanceCostsEachYear:
-					homeMaintenanceCostsEachYear[year],
-				rentIncomeEachYear: rentIncomeEachYear[year],
-
-				homeSellingFeesEachYear: homeSellingFeesEachYear[year],
-				loanPaymentEachYear: loanPaymentEachYear[year],
-
-				cashFlowIn: cashFlowIn[year],
-				cashFlowOut: cashFlowOut[year],
-				cashFlowNet: cashFlowNet[year],
-				cashFlowNetPosCumulative: cashFlowNetPosCumulative[year],
-
-				netWorthBuyPos: netWorthBuyPos[year],
-				netWorthBuyNeg: netWorthBuyNeg[year],
-				netWorthBuy: netWorthBuy[year],
-				netWorthBuyPV: netWorthBuyPV[year]
+				year,
+				...values
 			};
 		});
 
-		return (
-			<Table
-				data={data}
-				title={title}
-				columnNames={columnNames}
-			/>
-		);
+		return <Table title={title} data={data} columnNames={columnNames} />;
 	}
 }
 

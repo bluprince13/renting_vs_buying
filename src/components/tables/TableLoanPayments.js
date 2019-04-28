@@ -1,70 +1,36 @@
-import React from 'react';
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import d3 from 'd3';
+import React from "react";
+import Table from "./Table";
 
-const format = d3.format(".5s");
-const style = {
-	textAlign: 'center'
-}
-const Cell = ({ value }) => <div>{format(value)}</div>
+const columnNames = [
+	"month",
+	"interestEachMonth",
+	"principalEachMonth",
+	"loanPaymentEachMonth",
+	"debtEachMonth"
+];
+const title = "Buy scenario: Loan payments table";
 
 class TableLoanPayments extends React.Component {
 	render() {
-		const { buyScenarioOutputs } = this.props
-		const { amortizationTimeMonths, interestEachMonth, principalEachMonth, loanPaymentEachMonth, debtEachMonth } = buyScenarioOutputs
+		const { buyScenarioOutputs } = this.props;
+		const { amortizationTimeMonths } = buyScenarioOutputs;
 
-		const data = amortizationTimeMonths.map((month) => {
+		const data = amortizationTimeMonths.map(month => {
+			const values = columnNames
+				.slice(1)
+				.reduce((accumulator, columnName) => {
+					accumulator[columnName] =
+						buyScenarioOutputs[columnName][month];
+					return accumulator;
+				}, {});
+
 			return {
-				month: month,
-				interestEachMonth: interestEachMonth[month],
-				principalEachMonth: principalEachMonth[month],
-				loanPaymentEachMonth: loanPaymentEachMonth[month],
-				debtEachMonth: debtEachMonth[month]
-			}
-		})
+				month,
+				...values
+			};
+		});
 
-		return (
-			<div>
-				<h2>Buy scenario: Loan payments table</h2>
-				<ReactTable
-					data={data}
-					columns={[
-						{
-							Header: "Month",
-							accessor: "month",
-							style
-						},
-						{
-							Header: "Loan payment",
-							accessor: "loanPaymentEachMonth",
-							style,
-							Cell
-						},
-						{
-							Header: "Principal",
-							accessor: "principalEachMonth",
-							style,
-							Cell
-						},
-						{
-							Header: "Interest",
-							accessor: "interestEachMonth",
-							style,
-							Cell
-						},
-						{
-							Header: "Debt",
-							accessor: "debtEachMonth",
-							style,
-							Cell
-						}
-					]}
-					defaultPageSize={10}
-					className="-striped -highlight"
-				/>
-			</div>
-		);
+		return <Table title={title} data={data} columnNames={columnNames} />;
 	}
 }
 

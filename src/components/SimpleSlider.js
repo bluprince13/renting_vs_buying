@@ -21,10 +21,6 @@ class SimpleSlider extends Component {
       const buyScenarioOutputs = getBuyScenarioOutputs(this.props.input)
       const { cashFlowNet: buyScenarioCashFlowNet } = buyScenarioOutputs
       const rentScenarioOutputs = getRentScenarioOutputs({...this.props.input, buyScenarioCashFlowNet})
-      
-      console.info(input)
-      console.info(buyScenarioOutputs)
-      console.info(rentScenarioOutputs)
 
       const settings = {
         dots: true,

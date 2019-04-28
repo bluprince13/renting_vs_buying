@@ -8,6 +8,7 @@
     "mathjs": "5.2.3",
     "plotly.js": "^1.41.3",
     "react": "^16.5.2",
+    "react-csv": "1.1.1",
     "react-dom": "^16.5.2",
     "react-ga": "2.5.6",
     "react-plotly.js": "^2.2.0",

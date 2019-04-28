@@ -44,6 +44,14 @@ const style = {
 };
 const Cell = ({ value }) => <div>{format(value)}</div>;
 
+const getColumns = columnNames =>
+	columnNames.map(columnName => ({
+		Header: columnName,
+		accessor: columnName,
+		style,
+		Cell
+	}));
+
 class Table extends React.Component {
 	constructor(props) {
 		super(props);
@@ -54,7 +62,8 @@ class Table extends React.Component {
 	}
 
 	download(event) {
-		const { columns } = this.props;
+		const { columnNames } = this.props;
+		const columns = getColumns(columnNames);
 
 		const currentRecords = this.reactTable.getResolvedState().sortedData;
 		var data_to_download = [];
@@ -73,24 +82,20 @@ class Table extends React.Component {
 
 	render() {
 		const { columnNames, data, title } = this.props;
-
-		const columns = columnNames.map(columnName => ({
-			Header: columnName,
-			accessor: columnName,
-			style,
-			Cell
-		}));
+		const columns = getColumns(columnNames);
 
 		return (
 			<div>
-				<h2>{title}</h2>
-				<ReactTable
-					ref={r => (this.reactTable = r)}
-					data={data}
-					columns={columns}
-					defaultPageSize={10}
-					className="-striped -highlight"
-				/>
+				<div style={{ height: "65vh" }}>
+					<h2>{title}</h2>
+					<ReactTable
+						ref={r => (this.reactTable = r)}
+						data={data}
+						columns={columns}
+						defaultPageSize={10}
+						className="-striped -highlight"
+					/>
+				</div>
 				<Footer
 					style={{
 						display: "flex",

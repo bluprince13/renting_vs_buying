@@ -6,7 +6,9 @@ class StyledPlot extends React.Component {
 		return (
             <Plot {...this.props} style={{height: "65vh"}}
                 config={{
-                    responsive: true
+                    responsive: true,
+                    showLink: false,
+                    displayModeBar: true
                 }}
             />
 		);

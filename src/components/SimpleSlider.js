@@ -1,4 +1,5 @@
 import React, { Component} from "react";
+import styled from 'styled-components';
 import Slider from "react-slick";
 import { connect } from 'react-redux';
 import PlotRentVsBuy from './plots/PlotRentVsBuy';
@@ -14,6 +15,11 @@ import {
 	getBuyScenarioOutputs,
 	getRentScenarioOutputs,
 } from '../functions/formulas'
+
+const StyledSlider = styled.div`
+  width: 90%;
+  margin: auto;
+`
 
 class SimpleSlider extends Component {
     render() {
@@ -32,7 +38,7 @@ class SimpleSlider extends Component {
         arrows: true,
       };
       return (
-        <div>
+        <StyledSlider>
           <Slider {...settings}>
             <div>
               <PlotRentVsBuy input={input} buyScenarioOutputs={buyScenarioOutputs} rentScenarioOutputs={rentScenarioOutputs} />
@@ -59,7 +65,7 @@ class SimpleSlider extends Component {
               <TableRentScenario input={input} buyScenarioOutputs={buyScenarioOutputs} rentScenarioOutputs={rentScenarioOutputs} />
             </div>
           </Slider>
-        </div>
+        </StyledSlider>
       );
     }
   }

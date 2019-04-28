@@ -59,11 +59,6 @@ const Main = styled.div`
   align-items: stretch;
 `
 
-const Carousel = styled.div`
-  width: 90%;
-  margin: auto;
-`
-
 class App extends Component {
   componentDidMount()  {
     ReactGA.initialize('UA-35322373-2');
@@ -81,9 +76,7 @@ class App extends Component {
             <InputForm />
           </Sidebar>
           <Main>
-            <Carousel>
-              <SimpleSlider />
-            </Carousel>
+            <SimpleSlider />
           </Main>
         </Content>
 			</Layout>

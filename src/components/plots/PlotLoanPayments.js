@@ -1,28 +1,25 @@
-import React from 'react';
-import StyledPlot from '../StyledPlot';
-import Footer from '../Footer';
-import Annot from '../Annot';
-import { format2, format3 } from '../../functions/helpers';
+import React from "react";
+import StyledPlot from "../StyledPlot";
+import Footer from "../Footer";
+import Annot from "../Annot";
+import { format2, format3 } from "../../functions/helpers";
 class PlotLoanPayments extends React.Component {
 	render() {
-		const { input, buyScenarioOutputs } = this.props
+		const { input, buyScenarioOutputs } = this.props;
+		const { amortization, mortgageInterestRate } = input;
 		const {
-			amortization,
-			mortgageInterestRate
-		} = input
-		const { 
-			timeMonths, 
-			loan, 
-			interestEachMonth, 
+			timeMonths,
+			loan,
+			interestEachMonth,
 			interestSum,
-			principalEachMonth, 
+			principalEachMonth,
 			loanPaymentMonthly,
-			loanPaymentEachMonth, 
+			loanPaymentEachMonth,
 			loanPaymentSum,
-			debtEachMonth ,
+			debtEachMonth,
 			interestPVSum,
 			loanPaymentPVSum
-		} = buyScenarioOutputs
+		} = buyScenarioOutputs;
 
 		return (
 			<div>
@@ -31,61 +28,97 @@ class PlotLoanPayments extends React.Component {
 						{
 							x: timeMonths,
 							y: interestEachMonth,
-							name: 'Interest',
-							fill: 'tozeroy',
-							type: 'scatter',
-							stackgroup: 'one'
+							name: "Interest",
+							fill: "tozeroy",
+							type: "scatter",
+							stackgroup: "one"
 						},
 						{
 							x: timeMonths,
 							y: principalEachMonth,
-							name: 'Principal',
-							fill: 'tonexty',
-							type: 'scatter',
-							stackgroup: 'one'
+							name: "Principal",
+							fill: "tonexty",
+							type: "scatter",
+							stackgroup: "one"
 						},
 						{
 							x: timeMonths,
 							y: loanPaymentEachMonth,
-							name: 'Loan payment',
-							type: 'scatter',
+							name: "Loan payment",
+							type: "scatter"
 						},
 						{
 							x: timeMonths,
 							y: debtEachMonth,
-							yaxis: 'y2',
-							name: 'Debt',
-							type: 'scatter',
+							yaxis: "y2",
+							name: "Debt",
+							type: "scatter"
 						}
 					]}
 					layout={{
-						title: 'Buy scenario: Paying off the mortgage',
+						title: "Buy scenario: Paying off the mortgage",
 						xaxis: {
-							title: 'Time (months)',
-							hoverformat: '.0f',
-							showgrid: true,
+							title: "Time (months)",
+							hoverformat: ".0f",
+							showgrid: true
 						},
 						yaxis: {
-							title: 'Loan component',
-							tickformat: '.2s',
-							hoverformat: '.2s',
+							title: "Loan component",
+							tickformat: ".2s",
+							hoverformat: ".2s",
 							showgrid: true,
-							rangemode: 'tozero',
+							rangemode: "tozero"
 						},
 						yaxis2: {
-							title: 'Debt',
-							tickformat: '.2s',
-							hoverformat: '.2s',
+							title: "Debt",
+							tickformat: ".2s",
+							hoverformat: ".2s",
 							showgrid: false,
-							overlaying: 'y',
-							side: 'right',
-							rangemode: 'tozero'
+							overlaying: "y",
+							side: "right",
+							rangemode: "tozero"
 						}
 					}}
 				/>
 				<Footer>
 					<p>
-						An amortized loan is a loan where the periodic payment consists of both principal and interest. Interest is the cost of 'renting' money. The <Annot>{format3(loan)}</ Annot> loan required to be paid over <Annot>{Number.parseInt(amortization)}</ Annot> years with a mortage interest rate of <Annot>{mortgageInterestRate}%</Annot> results in a fixed monthly payment of <Annot>{format3(loanPaymentMonthly)}</Annot>. The first month's payment consists of <Annot>{format3(interestEachMonth[1])}</Annot> in interest which is <Annot>{format2(interestEachMonth[1]*100/loanPaymentMonthly)}%</Annot> of the monthly payment. Over time as the debt reduces, the interest that you pay also falls. In nominal terms, i.e., not accounting for inflation, the total interest paid over <Annot>{Number.parseInt(amortization)}</Annot> years is <Annot>{format2(interestSum*100/loanPaymentSum)}%</Annot> of the <Annot>{format3(loanPaymentSum)}</Annot> total cost of the mortgage. However, accounting for inflation, the present value of the total cost of the mortgage is <Annot>{format3(loanPaymentPVSum)}</Annot>. The interest paid is <Annot>{format2(interestPVSum*100/loanPaymentPVSum)}% </Annot> of this since more interest is paid in the earlier years when money has more value.
+						An amortized loan is a loan where the periodic payment
+						consists of both principal and interest. Interest is the
+						cost of 'renting' money. The{" "}
+						<Annot>{format3(loan)}</Annot> loan required to be paid
+						over <Annot>{Number.parseInt(amortization)}</Annot>{" "}
+						years with a mortage interest rate of{" "}
+						<Annot>{mortgageInterestRate}%</Annot> results in a
+						fixed monthly payment of{" "}
+						<Annot>{format3(loanPaymentMonthly)}</Annot>. The first
+						month's payment consists of{" "}
+						<Annot>{format3(interestEachMonth[1])}</Annot> in
+						interest which is{" "}
+						<Annot>
+							{format2(
+								(interestEachMonth[1] * 100) /
+									loanPaymentMonthly
+							)}
+							%
+						</Annot>{" "}
+						of the monthly payment. Over time as the debt reduces,
+						the interest that you pay also falls. In nominal terms,
+						i.e., not accounting for inflation, the total interest
+						paid over <Annot>{Number.parseInt(amortization)}</Annot>{" "}
+						years is{" "}
+						<Annot>
+							{format2((interestSum * 100) / loanPaymentSum)}%
+						</Annot>{" "}
+						of the <Annot>{format3(loanPaymentSum)}</Annot> total
+						cost of the mortgage. However, accounting for inflation,
+						the present value of the total cost of the mortgage is{" "}
+						<Annot>{format3(loanPaymentPVSum)}</Annot>. The interest
+						paid is{" "}
+						<Annot>
+							{format2((interestPVSum * 100) / loanPaymentPVSum)}%{" "}
+						</Annot>{" "}
+						of this since more interest is paid in the earlier years
+						when money has more value.
 					</p>
 				</Footer>
 			</div>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
 import InputForm from './InputForm';
 import SimpleSlider from './SimpleSlider';
+import Header from './Header';
 import { media } from '../style';
 
 const Layout = styled.div`
@@ -16,12 +16,6 @@ const Layout = styled.div`
   `}
 `
 
-const Header = styled.div`
-  padding: 1rem;
-  text-align: center;
-  background: green;
-  font-size: 3rem;
-`
   // ${media.desktop`background: dodgerblue;`}
   // ${media.tablet`background: mediumseagreen;`}
   // ${media.phone`background: palevioletred;`}
@@ -68,9 +62,7 @@ class App extends Component {
 	render() {
 		return (
 			<Layout>
-        <Header>
-			    <Link onClick={this.forceUpdate} to='/' style={{ textDecoration: 'none', color: "white"}}>Renting vs. buying a house</Link>
-        </Header>
+        <Header />
         <Content>
           <Sidebar>
             <InputForm />

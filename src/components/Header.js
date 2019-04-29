@@ -43,11 +43,12 @@ class Header extends Component {
 				<Link
 					onClick={this.forceUpdate}
 					to="/"
-					style={{ textDecoration: "none", color: "white" }}
+                    style={{ textDecoration: "none", color: "white" }}
+                    className="header"
 				>
 					Renting vs. buying a house
 				</Link>
-				<StyledNavBar>
+				<StyledNavBar className="navbar">
 					<li>
 						<a href="www.vipinajayakumar.com/renting-vs-buying-a-house-in-the-uk.html"><i class="fas fa-book-reader fa-fw"></i>  Blog</a>
 					</li>

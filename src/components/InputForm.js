@@ -38,7 +38,7 @@ const renderFieldSets = Object.keys(fields).map(key => {
  */
 class InputForm extends Component {
 	render() {
-		return <StyledForm>{renderFieldSets}</StyledForm>;
+		return <StyledForm className="form">{renderFieldSets}</StyledForm>;
 	}
 }
 

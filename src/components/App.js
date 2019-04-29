@@ -12,6 +12,8 @@ const Layout = styled.div`
 	flex-direction: column;
 	height: 100vh;
 
+	background-color: white;
+
 	${media.tablet`
     height: 100%;
   `}

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 
-import InputElement from './InputElement';
-import fields from '../data/fields';
+import InputElement from "./InputElement";
+import fields from "../data/fields";
 
 const StyledForm = styled.form`
 	overflow-y: scroll;
-	height: 100%
+	height: 100%;
 `;
 
 const StyledFieldSet = styled.fieldset`
@@ -16,9 +16,10 @@ const StyledFieldSet = styled.fieldset`
 	padding: 1rem;
 `;
 
-const renderFields = set => set.map(props => {
-	return <InputElement key={props.name} props={props} />
-});
+const renderFields = set =>
+	set.map(props => {
+		return <InputElement key={props.name} props={props} />;
+	});
 
 const renderFieldSets = Object.keys(fields).map(key => {
 	return (
@@ -26,7 +27,7 @@ const renderFieldSets = Object.keys(fields).map(key => {
 			<legend>{key}</legend>
 			{renderFields(fields[key])}
 		</StyledFieldSet>
-	)
+	);
 });
 
 /**

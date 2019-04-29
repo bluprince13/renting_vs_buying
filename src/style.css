@@ -1,36 +1,39 @@
 *,
 *::after,
 *::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit; 
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
 
-  min-height: 0;
-  min-width: 0;
+	min-height: 0;
+	min-width: 0;
 }
 
 html {
-  font-size: 62.5%; }
+	font-size: 62.5%;
+}
 
 body {
-  box-sizing: border-box; }
+	box-sizing: border-box;
+}
 
 body {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  line-height: 1.7;
-  color: #777;
-  padding: 0 3rem; 
-  max-width: 114rem;
-  margin: auto auto
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	line-height: 1.7;
+	color: #777;
+	padding: 0 3rem;
+	max-width: 114rem;
+	margin: auto auto;
 }
 
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
 
-.slick-prev:before, .slick-next:before { 
-  color:green !important;
+.slick-prev:before,
+.slick-next:before {
+	color: green !important;
 }

@@ -61,7 +61,7 @@ const Info = styled.div`
 
 class InputElement extends Component {
   render() {
-    const { label, name, min, max, step, type, info, unit } = this.props.props;
+    const { label, name, min, max, step, info, unit } = this.props.props;
     const { changeInput, input } = this.props;
     const value = input[name];
     const throttledChangeInput = _.throttle(changeInput, 100)

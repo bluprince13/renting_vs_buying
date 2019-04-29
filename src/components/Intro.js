@@ -25,7 +25,7 @@ class Intro extends Component {
 				showSkipButton: true
 			},
 			{
-				target: ".copy",
+				target: ".copy-url",
 				content:
 					"When you're done, copy the URL so that you can come back to it later or to share with friends.",
 				disableBeacon: true,

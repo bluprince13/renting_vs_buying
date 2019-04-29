@@ -18,6 +18,7 @@
     "react-scripts": "2.0.4",
     "react-slick": "0.23.2",
     "react-table": "6.8.6",
+    "react-tooltip": "3.10.0",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-query-sync": "0.1.7",

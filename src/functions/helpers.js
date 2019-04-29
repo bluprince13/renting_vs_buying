@@ -10,5 +10,4 @@ export const copyToClipboard = text => {
     dummy.select();
     document.execCommand("copy");
     document.body.removeChild(dummy);
-    console.log("copied")
 };

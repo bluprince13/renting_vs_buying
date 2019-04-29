@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
 import { copyToClipboard } from "../functions/helpers";
 
 const StyledHeader = styled.div`
@@ -61,7 +62,11 @@ const StyledButton = styled.button`
 
 class Header extends Component {
 	handleClick() {
-		copyToClipboard(window.location.href)
+		copyToClipboard(window.location.href);
+
+		setTimeout(() => {
+			ReactTooltip.hide() 
+		}, 1500);
 	}
 
 	render() {
@@ -70,8 +75,8 @@ class Header extends Component {
 				<Link
 					onClick={this.forceUpdate}
 					to="/"
-                    style={{ textDecoration: "none", color: "white" }}
-                    className="header"
+					style={{ textDecoration: "none", color: "white" }}
+					className="header"
 				>
 					Renting vs. buying a house
 				</Link>
@@ -88,10 +93,20 @@ class Header extends Component {
 					</li>
 				</StyledNavBar>
 				<StyledButton
-					className="copy"
+					className="copy-url"
 					onClick={this.handleClick}
+					data-tip="URL copied"
+					data-event="click"
+					ref={r => (this.copybutton = r)}
 				>
-					<i class="fas fa-copy" /> Copy URL
+					<i className="fas fa-copy" /> Copy URL
+					<ReactTooltip
+						place="bottom"
+						type="dark"
+						effect="solid"
+						ref={r => (this.tooltip = r)}
+						isCapture={true}
+					/>
 				</StyledButton>
 			</StyledHeader>
 		);

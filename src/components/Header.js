@@ -37,6 +37,28 @@ const StyledNavBar = styled.ul`
 	}
 `;
 
+const StyledButton = styled.button`
+	position: absolute;
+	top: 0;
+    right: 0;
+	font-size: 1.5rem;
+	
+	background-color: inherit
+	color: white
+
+	border: none
+
+	padding: 0.5rem 1rem;
+
+    &:hover {
+        background-color: #006400;
+	}
+	
+	&:focus {
+        outline: none;
+    }
+`;
+
 class Header extends Component {
 	handleClick() {
 		copyToClipboard(window.location.href)

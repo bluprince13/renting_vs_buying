@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { copyToClipboard } from "../functions/helpers";
 
 const StyledHeader = styled.div`
 	position: relative;
@@ -37,6 +38,10 @@ const StyledNavBar = styled.ul`
 `;
 
 class Header extends Component {
+	handleClick() {
+		copyToClipboard(window.location.href)
+	}
+
 	render() {
 		return (
 			<StyledHeader>
@@ -50,12 +55,22 @@ class Header extends Component {
 				</Link>
 				<StyledNavBar className="navbar">
 					<li>
-						<a href="www.vipinajayakumar.com/renting-vs-buying-a-house-in-the-uk.html"><i className="fas fa-book-reader fa-fw"></i>  Blog</a>
+						<a href="www.vipinajayakumar.com/renting-vs-buying-a-house-in-the-uk.html">
+							<i className="fas fa-book-reader fa-fw" /> Blog
+						</a>
 					</li>
 					<li>
-						<a href="www.github.com/bluprince13/renting_vs_buying"><i className="fab fa-github fa-fw"></i> Github</a>
+						<a href="www.github.com/bluprince13/renting_vs_buying">
+							<i className="fab fa-github fa-fw" /> Github
+						</a>
 					</li>
 				</StyledNavBar>
+				<StyledButton
+					className="copy"
+					onClick={this.handleClick}
+				>
+					<i class="fas fa-copy" /> Copy URL
+				</StyledButton>
 			</StyledHeader>
 		);
 	}

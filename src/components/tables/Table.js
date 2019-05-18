@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import d3 from "d3";
+import { format } from "d3-format";
 import { CSVLink } from "react-csv";
 import styled from "styled-components";
 
@@ -33,16 +33,16 @@ const StyledButton = styled.button`
 	}
 `;
 
-const format = number => {
+const format3 = number => {
 	if (Number.isInteger(number)) {
 		return number;
 	}
-	return d3.format(".3s")(number);
+	return format(".3s")(number);
 };
 const style = {
 	textAlign: "center"
 };
-const Cell = ({ value }) => <div>{format(value)}</div>;
+const Cell = ({ value }) => <div>{format3(value)}</div>;
 
 const getColumns = columnNames =>
 	columnNames.map(columnName => ({

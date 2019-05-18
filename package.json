@@ -27,7 +27,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docs": "cd docs/website && npm start"
+    "docs": "cd docs/website && npm start",
+    "now-dev": "react-scripts start",
+    "now-build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"

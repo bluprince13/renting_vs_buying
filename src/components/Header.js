@@ -74,7 +74,7 @@ class Header extends Component {
 			<StyledHeader>
 				<Link
 					onClick={this.forceUpdate}
-					to="/"
+					to={process.env.PUBLIC_URL}
 					style={{ textDecoration: "none", color: "white" }}
 					className="header"
 				>

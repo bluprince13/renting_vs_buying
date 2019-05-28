@@ -25,6 +25,6 @@ const params = allFields.reduce(
 
 export default ReduxQuerySync.enhancer({
     params,
-    initialTruth: 'store',
+    initialTruth: 'location',
     replaceState: false,
 })

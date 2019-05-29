@@ -88,7 +88,7 @@ class Header extends Component {
 					</li>
 					<li>
 						<a href="//github.com/bluprince13/renting_vs_buying">
-							<i className="fab fa-github fa-fw" /> Github
+							<i className="fab fa-github fa-fw" /> GitHub
 						</a>
 					</li>
 				</StyledNavBar>

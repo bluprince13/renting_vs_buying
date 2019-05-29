@@ -155,7 +155,7 @@ export default {
 				label: 'Initial monthly rent',
 				name: 'rentFirstMonth',
 				min: 50,
-				max: 1500,
+				max: 2000,
 				step: 10,
 				defaultValue: 320,
 				type: 'range',

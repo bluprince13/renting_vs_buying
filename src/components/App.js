@@ -65,7 +65,7 @@ class App extends Component {
 	render() {
 		return (
 			<Layout>
-				<Intro repeat={true} />
+				<Intro repeat={false} />
 				<Header />
 				<Content>
 					<Sidebar>

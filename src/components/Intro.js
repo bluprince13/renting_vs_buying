@@ -3,7 +3,7 @@ import Joyride from "react-joyride";
 
 class Intro extends Component {
 	constructor (props) {
-		super(props)
+		super(props);
 	}
 
 	getStorage (key) {
@@ -11,7 +11,7 @@ class Intro extends Component {
 	}
 
 	removeStorage (key) {
-		return window.localStorage.getItem(key) && window.localStorage.removeItem(key)
+		return window.localStorage.getItem(key) && window.localStorage.removeItem(key);
 	}
 
 	setStorage (key, val) {
@@ -58,21 +58,21 @@ class Intro extends Component {
 	};
 
 	render() {
-		const { repeat } = this.props
+		const { repeat } = this.props;
 		const { steps } = this.state;
-		const isFirstAccess = !!this.getStorage('FIRST_ACCESS')
+		const isFirstAccess = !!this.getStorage('FIRST_ACCESS');
 
 		if (repeat) {
-			this.removeStorage('FIRST_ACCESS')
-			return <Joyride steps={steps} />
+			this.removeStorage('FIRST_ACCESS');
+			return <Joyride steps={steps} />;
 		}
 
 		if (!isFirstAccess) {
-			this.setStorage('FIRST_ACCESS', true)
-			return <Joyride steps={steps} />
+			this.setStorage('FIRST_ACCESS', true);
+			return <Joyride steps={steps} />;
 		}
 
-		return ''
+		return '';
 	}
 }
 

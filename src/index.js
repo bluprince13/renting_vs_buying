@@ -23,7 +23,7 @@ const store = createStore(
 
 render(
 	<Provider store={store}>
-		<Router basename={process.env.PUBLIC_URL}>
+		<Router basename="/apps/renting-vs-buying">
 				<App />
 		</Router>
 	</Provider>,

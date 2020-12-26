@@ -1,6 +1,6 @@
 {
   "name": "renting_vs_buying",
-  "homepage": ".",
+  "homepage": "/apps/renting-vs-buying",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
